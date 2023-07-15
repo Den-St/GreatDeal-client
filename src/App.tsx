@@ -1,9 +1,15 @@
-import React from 'react';
-import './App.css';
+import { Normalize } from "styled-normalize"
+import { Layout } from "./containers/Layout"
+import { RoutesSwitch } from "./helpers/routes"
 
-function App() {
-  return <>
-  </>
+export const App = () => {
+  return (
+    <>
+     <Normalize/>
+     <Layout>
+      <RoutesSwitch/>
+     </Layout>
+    </>
+  )
 }
 
-export default App;
