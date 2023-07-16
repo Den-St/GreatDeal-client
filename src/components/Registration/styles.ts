@@ -1,13 +1,13 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
     display:flex;
     flex-direction:column;
     width:100%;
-    heigth:100vh;
 `;
 
-export const Top = styled.div`
+export const Top = styled.form`
     padding: 50px 0 55px 0;
     box-sizing:border-box;
     display:flex;
@@ -15,6 +15,13 @@ export const Top = styled.div`
     align-items: center;
     gap:26px;
     background-color: white;
+    input{
+        width:250px;
+        height:36px;
+    }
+    input[type=submit]{
+        width:30%;
+    }
 `;
 
 export const Name = styled.label`
@@ -27,18 +34,16 @@ export const Input = styled.input`
     width: 70%;
     font-size: 17px;
     border: 1px solid black;
-    color:white;
     border-radius: 5px;
     padding-left: 15px;
 `;
 
-export const SubmitButton = styled.button`
+export const SubmitButton = styled.input`
     width: 30%;
-    height: 40px;
     border-radius: 10px;
     align-items:center;
     justify-content: center;
-    font-size: 22px;
+    font-size: 20px;
     color:white;
     background-color: #404040;
 `;
@@ -53,10 +58,9 @@ export const Title = styled.label`
 export const Bottom = styled.div`
     display:flex;
     flex-direction:column;
-    align-content: center;
     justify-content: space-between;
     padding: 15px 0;
-    gap:40px;
+    gap:57px;
     height: 100%;
     background: rgb(56,56,56);
 `;
@@ -66,11 +70,14 @@ export const NoAccountNotification = styled.label`
     color: white;
 `;
 
-export const RegistrationButton = styled.button`
+export const RegistrationButton = styled(Link)`
     width: 45%;
+    text-decoration: none;
+    
     height: 40px;
     background-color: white;
     border-radius: 25px;
+    display:flex;
     align-items: center;
     justify-content: center;
     font-size: 22px;
@@ -94,7 +101,11 @@ export const SocialsContainer = styled.div`
 export const SocialButton = styled.button`
     width: 40px;
     height: 40px;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-size: 30px;
+    background:transparent;
+    outline:none;
+    border:none;
 `;

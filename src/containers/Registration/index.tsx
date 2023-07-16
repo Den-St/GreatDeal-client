@@ -1,7 +1,7 @@
 import { RegistrationComponent } from "../../components/Registration/index"
 
 function Registration() {
-  return <RegistrationComponent/>
+  return <RegistrationComponent />
 }
 
 export default Registration
