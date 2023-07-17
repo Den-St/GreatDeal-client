@@ -1,8 +1,10 @@
+import { createUserI } from './../types/user.type';
+import { createUser } from './../firebase/db/users/create/createUser';
 import { message } from "antd";
 import { createUserWithEmailAndPassword, AuthErrorCodes, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
-import { authProvider, googleProvider } from "../firebase/firebaseInit";
+import { googleAuthProvider, googleProvider } from "../firebase/firebaseInit";
 import { RegistrationInterface } from "../types/registration.type";
 
 export const useRegistration = () => {
@@ -11,7 +13,15 @@ export const useRegistration = () => {
     
     const onSubmit:SubmitHandler<RegistrationInterface> = async (data:RegistrationInterface) => {
         try{
-            await createUserWithEmailAndPassword(authProvider,data.email,data.password)
+            await createUserWithEmailAndPassword(googleAuthProvider,data.email,data.password);
+            if(googleAuthProvider.currentUser === null) return;
+            const {displayName, email, photoURL} = googleAuthProvider.currentUser;
+            const {creationTime} = googleAuthProvider.currentUser.metadata;
+            await createUser({email,
+                              displayName,
+                              photoURL,
+                              createdAt:creationTime
+                            });
             setSuccess(true);
         }catch(err){
             if(AuthErrorCodes.EMAIL_EXISTS === JSON.parse(JSON.stringify(err)).code){
@@ -25,7 +35,16 @@ export const useRegistration = () => {
 
     const signInWithGoogle = async () => {
         try{
-            await signInWithPopup(authProvider,googleProvider);
+            await signInWithPopup(googleAuthProvider,googleProvider);
+            if(googleAuthProvider.currentUser === null) return;
+            const {displayName, email, photoURL} = googleAuthProvider.currentUser;
+            const {creationTime} = googleAuthProvider.currentUser.metadata;
+            await createUser({
+                              email,
+                              displayName,
+                              photoURL,
+                              createdAt:creationTime
+                            });
             setSuccess(true);
         }catch(err){
             console.log(err);

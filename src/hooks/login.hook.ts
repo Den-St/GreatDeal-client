@@ -2,7 +2,7 @@ import { message } from "antd";
 import { signInWithEmailAndPassword, AuthErrorCodes, signInWithPopup } from "firebase/auth";
 import { useState } from "react";
 import { SubmitHandler } from "react-hook-form";
-import { authProvider, googleProvider } from "../firebase/firebaseInit";
+import { googleAuthProvider, googleProvider } from "../firebase/firebaseInit";
 import { RegistrationInterface } from "../types/registration.type";
 
 export const useLogin = () => {
@@ -11,7 +11,7 @@ export const useLogin = () => {
     const onSubmit:SubmitHandler<RegistrationInterface> = async (data:RegistrationInterface) => {
         try{
             console.log("vcvcvc");
-            await signInWithEmailAndPassword(authProvider,data.email,data.password);
+            await signInWithEmailAndPassword(googleAuthProvider,data.email,data.password);
             setSuccess(true);
         }catch(err){
             if(AuthErrorCodes.INVALID_PASSWORD === JSON.parse(JSON.stringify(err)).code 
@@ -25,7 +25,7 @@ export const useLogin = () => {
       }
       const signInWithGoogle = async () => {
         try{
-            await signInWithPopup(authProvider,googleProvider);
+            await signInWithPopup(googleAuthProvider,googleProvider);
             setSuccess(true);
         }catch(err){
             console.log(err);
