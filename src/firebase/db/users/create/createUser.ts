@@ -2,10 +2,9 @@ import { usersCollection } from './../users.collection';
 import { addDoc } from "firebase/firestore";
 import { createUserI } from '../../../../types/user.type';
 
-export const createUser = (user:createUserI) => {
+export const createUser = async (user:createUserI) => {
     try{
-        console.log(user)
-        addDoc(usersCollection,{...user});
+        await addDoc(usersCollection,{...user});
     }catch(err){
         console.error(err);
     }

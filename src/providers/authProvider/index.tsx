@@ -1,9 +1,5 @@
-import { onAuthStateChanged } from "firebase/auth";
-import React, { useEffect, useState } from "react"
-import { googleAuthProvider } from "../../firebase/firebaseInit";
+import React from "react"
 import { useAuth } from "../../hooks/auth.hook";
-import { useAppDispacth, useAppSelector } from "../../hooks/redux";
-import { setUser } from "../../store/userSlice";
 
 type Props = {
     children:React.ReactNode

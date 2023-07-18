@@ -1,4 +1,3 @@
-import { createUserI } from './../types/user.type';
 import { createUser } from './../firebase/db/users/create/createUser';
 import { message } from "antd";
 import { createUserWithEmailAndPassword, AuthErrorCodes, signInWithPopup } from "firebase/auth";

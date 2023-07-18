@@ -12,7 +12,6 @@ export const LoginComponent = () => {
     const {
         register,
         handleSubmit,
-        formState: { errors },
     } = useForm<RegistrationInterface>();
  
   if(success) return <Navigate to={'/'}/>

@@ -1,6 +1,4 @@
-import { googleAuthProvider } from '../firebase/firebaseInit';
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { onAuthStateChanged } from "firebase/auth";
 import { UserI } from "../types/user.type";
 
 const initialState:UserI = {
