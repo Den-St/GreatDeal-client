@@ -3,18 +3,20 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useState, useEffect } from "react";
 import { googleAuthProvider } from "../firebase/firebaseInit";
 import { setUser } from "../store/userSlice";
-import { useAppDispacth, useAppSelector } from "./redux";
+import { useAppDispacth } from "./redux";
 import { getUserByEmail } from '../firebase/db/users/get/getUserByEmail';
 
 export const useAuth = () => {
     const [loading, setLoading] = useState(true);
+    const [isSignedIn,setIsSignedIn] = useState(true);
     const dispatch = useAppDispacth();
-    const user = useAppSelector(state => state.user);
-
+    
     useEffect(() => {
         onAuthStateChanged(googleAuthProvider,async () => {
+            setIsSignedIn(true);
             if(!googleAuthProvider.currentUser) {
                 setLoading(false);
+                setIsSignedIn(false);
                 return;
             }
 
@@ -24,15 +26,15 @@ export const useAuth = () => {
                 email:googleAuthProvider.currentUser?.email,
                 displayName:googleAuthProvider.currentUser?.displayName,
                 createdAt:googleAuthProvider.currentUser?.metadata.creationTime,
-                photoURL:googleAuthProvider.currentUser?.photoURL
+                photoURL:googleAuthProvider.currentUser?.photoURL,
             }
             dispatch(setUser({
                 ...userDataGoogle,...user
             }));
         });
         setLoading(false);
-        console.log('user',user);
     },[]);
+    console.log("sss",isSignedIn);
 
-    return {loading};
+    return {loading, isSignedIn, setIsSignedIn};
 }

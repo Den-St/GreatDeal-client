@@ -3,6 +3,7 @@ export interface UserI {
     displayName?:string | null;
     photoURL?:string | null;
     createdAt?:string | null;
+    id?:string | null;
 }
 
 export interface createUserI {

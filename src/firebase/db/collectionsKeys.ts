@@ -1,4 +1,5 @@
 export enum collectionsKeys {
     users = "users",
-    jobs = "jobs"
+    jobs = "jobs",
+    categories = "categories"
 };

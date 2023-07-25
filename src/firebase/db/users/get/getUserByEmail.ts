@@ -4,7 +4,7 @@ import { usersCollection } from "../users.collection";
 
 export const getUserByEmail = async (email?:string | null) => {
     try{
-        const q = await query(usersCollection,where('email', "==", email));
+        const q = query(usersCollection,where('email', "==", email));
         const docs = await getDocs(q);
         return getFilteredQuery(docs)[0];
     }catch(err){

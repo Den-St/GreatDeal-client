@@ -9,7 +9,12 @@ import { RegistrationInterface } from "../types/registration.type";
 export const useRegistration = () => {
     const [success,setSuccess] = useState(false);
     const [messageApi, contextHolder] = message.useMessage();
-    
+    const showError = (message:string) => {
+        messageApi.open({
+          type: 'error',
+          content: message,
+        });
+      }
     const onSubmit:SubmitHandler<RegistrationInterface> = async (data:RegistrationInterface) => {
         try{
             await createUserWithEmailAndPassword(googleAuthProvider,data.email,data.password);
@@ -24,10 +29,7 @@ export const useRegistration = () => {
             setSuccess(true);
         }catch(err){
             if(AuthErrorCodes.EMAIL_EXISTS === JSON.parse(JSON.stringify(err)).code){
-                messageApi.open({
-                type: 'error',
-                content: 'Email already in use',
-              });
+              showError('Email already in use');
             }
         }
       }
@@ -50,5 +52,5 @@ export const useRegistration = () => {
         }
     }
 
-    return {signInWithGoogle,onSubmit,success,contextHolder};
+    return {signInWithGoogle,onSubmit,success,contextHolder,showError};
 }

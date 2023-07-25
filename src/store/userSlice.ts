@@ -5,7 +5,8 @@ const initialState:UserI = {
     email:null,
     createdAt:null,
     displayName:null,
-    photoURL:null,    
+    photoURL:null,  
+    id:null
 }
 
 const userSlice = createSlice({
@@ -17,6 +18,7 @@ const userSlice = createSlice({
             state.createdAt = payload?.payload.createdAt;
             state.displayName = payload?.payload.displayName;
             state.photoURL = payload?.payload.photoURL;
+            state.id = payload?.payload.id;
         }
     }
 });

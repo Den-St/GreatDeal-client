@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-    width:100vw;
-    height:90vh;
+    width:100%;
+    height:93vh;
     .leaflet-container{
-        height:90vh;
+        height:93vh;
     }
 `;
 
