@@ -1,16 +1,18 @@
-import { Icon, LatLng } from "leaflet";
+import { Icon, LatLng, LatLngBounds } from "leaflet";
 import { useState, useEffect } from "react";
 import { useMapEvents, Marker, Popup } from "react-leaflet";
 
 type Props = {
   setUserLocationLoading:(val:boolean) => void,
+  setUserLocation?:(location:LatLng) => void
 }
 
-export const MyLocationMarker:React.FC<Props> = ({setUserLocationLoading}) => {
+export const MyLocationMarker:React.FC<Props> = ({setUserLocationLoading,setUserLocation}) => {
     const [position, setPosition] = useState<LatLng | null>(null)
     const map = useMapEvents({
       locationfound(e) {
         setPosition(e.latlng);
+        if(setUserLocation) setUserLocation(e.latlng);
         map.setView(e.latlng);
         setUserLocationLoading(false);
       },

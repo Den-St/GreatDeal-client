@@ -1,9 +1,8 @@
-import { useLocation, useParams, useSearchParams } from "react-router-dom"
+import { useJobPage } from "../../hooks/jobPage.hook";
 
 export const JobPageComponent = () => {
-    const a = useParams();
-    
-    console.log('f',a.id)
+    const {job,jobLoading} = useJobPage();
     return <>
+    {job?.id}
     </>
 }

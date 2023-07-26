@@ -16,7 +16,6 @@ export const useLogin = () => {
     }
     const onSubmit:SubmitHandler<RegistrationInterface> = async (data:RegistrationInterface) => {
         try{
-            console.log("vcvcvc");
             await signInWithEmailAndPassword(googleAuthProvider,data.email,data.password);
             setSuccess(true);
         }catch(err){
@@ -31,7 +30,7 @@ export const useLogin = () => {
             await signInWithPopup(googleAuthProvider,googleProvider);
             setSuccess(true);
         }catch(err){
-            console.log(err);
+            console.error(err);
         }
       }    
 

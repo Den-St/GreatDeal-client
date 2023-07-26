@@ -10,7 +10,7 @@ import { RoutesSwitch } from "./helpers/routes"
 import { AuthProvider } from "./providers/authProvider"
 
 export const App = () => {
-  onAuthStateChanged(googleAuthProvider,() => console.log('xzc',googleAuthProvider.currentUser))
+  onAuthStateChanged(googleAuthProvider,() => console.log('authed user',googleAuthProvider.currentUser))
   useEffect(() => {
     // getUsers().then((data) => console.log(data));
     // getJobs().then(a => console.log(a));

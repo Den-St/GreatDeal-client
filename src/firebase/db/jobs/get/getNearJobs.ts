@@ -1,26 +1,24 @@
+import { LatLng, LatLngBounds } from 'leaflet';
 import { jobsCollection } from './../jobs.collection';
 import { getDocs, query, where } from "firebase/firestore";
-import { JobT, SearchJobT } from "../../../../types/job.type";
 import { getUserById } from '../../users/get/getUserById';
 import { getCategoryById } from '../../categories/get/getCategoryById';
 
-export const getJobsByFilters = async (filters:SearchJobT) => {
+export const getNearJobs = async (mapBounds:LatLngBounds) => {
     try{
-        const q = filters.category ? query(jobsCollection,
-        where('title',">=",filters.title || ''),   
-        where('title','<=',(filters.title || '') + "\uf8ff"),
-        where('category','==',filters.category?.id || null))
-        : query(jobsCollection,
-          where('title',">=",filters.title || ''),   
-          where('title','<=',(filters.title || '') + "\uf8ff"));
-
+        const q = query(jobsCollection,
+            where('location._lat',">=",mapBounds.getSouth()),
+            where('location._lat',"<=",mapBounds.getNorth()),
+        );
+ 
         const docs = (await getDocs(q)).docs;
         const jobs = docs.map(jobDoc => {
-            if(+jobDoc.data().reward > (filters.rewardMin || 0)){
+            if(jobDoc.data()?.location._long >= mapBounds.getWest() 
+               && jobDoc.data()?.location._long <= mapBounds.getEast()){
                 return jobDoc.data();
             }
-        });
-        
+        }).filter(job => job);
+       
         const creatorsQ = jobs.map(async (job) => job && await getUserById(job.creator));
         const categoriesQ = jobs.map(async (job) => job && await getCategoryById(job.category));
         const creators = await Promise.all(creatorsQ);

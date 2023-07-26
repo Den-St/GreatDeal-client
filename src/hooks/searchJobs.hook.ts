@@ -18,7 +18,7 @@ export const useSearchJobs = () => {
         const res = await getJobsByFilters({title:value || '',category:_category,rewardMin});
         setJobs(res as JobT[]);
     }catch(err){
-        console.log(err);
+        console.error(err);
     }
     setJobsLoading(false);
   }

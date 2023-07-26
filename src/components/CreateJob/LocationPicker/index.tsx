@@ -1,4 +1,4 @@
-import { LatLng } from 'leaflet'
+import { Icon, LatLng } from 'leaflet'
 import { MapContainer, Marker, TileLayer, useMapEvents } from 'react-leaflet'
 import { MyLocationMarker } from '../../MyLocationMarker'
 import { Container } from './styles'
@@ -32,10 +32,19 @@ const LocationPicker:React.FC<LocationPickerProps> = ({pickedLocation,setLocatio
     useMapEvents({
       click(e) { 
         setLocation(e.latlng);
+        console.log(e.latlng);
       },
+      zoom(e){
+        console.log('zoom',e)
+      }
     });
     
+    const icon = new Icon({
+      iconUrl:'https://img.icons8.com/?size=512&id=13800&format=png',
+      iconSize:[30,30]
+    });
+
     return pickedLocation === null ? null : (
-      <Marker position={pickedLocation} title={'PICKED'}/>
+      <Marker icon={icon} position={pickedLocation} title={'PICKED'}/>
     )
 }

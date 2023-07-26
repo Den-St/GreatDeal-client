@@ -17,7 +17,7 @@ export const useSearchCategories = () => {
             const res = await getCategoriesByName(value);
             setCategories(res as CategoryT[]);
         }catch(err){
-            console.log(err);
+            console.error(err);
         }
         setLoading(false);
     }

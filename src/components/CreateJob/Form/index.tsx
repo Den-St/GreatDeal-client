@@ -23,7 +23,6 @@ export const CreateJobForm:React.FC<Props> = ({success,onSubmit,searchCategories
         handleSubmit,
         formState:{errors}
     } = useForm<CreateJobT>();
-    console.log('gtgt',chosenCategory);
 
     if(success) return <Navigate to={'/'}/>
     return <Container onSubmit={handleSubmit(onSubmit)}>

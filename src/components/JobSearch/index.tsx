@@ -41,7 +41,7 @@ export const JobSearch = () => {
         {!jobsLoading ? !!jobs?.length ? jobs?.map(job => 
         <JobItemContainer key={job?.id}>
             <Link to={`/job/${job?.id}`}>{job?.title}</Link>
-        </JobItemContainer>):<h1>no data</h1> : <h1>Loading...</h1>}
+        </JobItemContainer>) : <h1>no data</h1> : <h1>Loading...</h1>}
     </JobsContainer>
     </Wrapper>
   </Container>

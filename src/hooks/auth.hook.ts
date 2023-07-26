@@ -34,7 +34,6 @@ export const useAuth = () => {
         });
         setLoading(false);
     },[]);
-    console.log("sss",isSignedIn);
 
     return {loading, isSignedIn, setIsSignedIn};
 }

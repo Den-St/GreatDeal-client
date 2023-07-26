@@ -12,7 +12,6 @@ export const AuthProvider:React.FC<Props> = ({children}) => {
    
     if(loading) return <h1>LOADING...</h1>
     if(!loading && !isSignedIn && path !== '/registration' && path !== '/login') {
-        console.log('not signed in')
         return <Navigate to={'/registration'}/>
     }
     return <>

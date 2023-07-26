@@ -15,7 +15,6 @@ export const LoginComponent = () => {
         handleSubmit,
         formState:{errors}
     } = useForm<RegistrationInterface>();
-    console.log(errors);
     useEffect(() => {
         if(errors.email?.message) showError(errors.email.message);
         if(errors.password?.message) showError(errors.password.message);
