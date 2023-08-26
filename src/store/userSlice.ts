@@ -6,7 +6,8 @@ const initialState:UserI = {
     createdAt:null,
     displayName:null,
     photoURL:null,  
-    id:null
+    id:null,
+    lastLocation:null
 }
 
 const userSlice = createSlice({
@@ -19,6 +20,7 @@ const userSlice = createSlice({
             state.displayName = payload?.payload.displayName;
             state.photoURL = payload?.payload.photoURL;
             state.id = payload?.payload.id;
+            state.lastLocation = payload.payload.lastLocation
         }
     }
 });

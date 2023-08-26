@@ -1,0 +1,1 @@
+export const defaultAvatar = 'https://firebasestorage.googleapis.com/v0/b/greatdeal-4548d.appspot.com/o/messageImage%2Fdefault-avatar-icon-of-social-media-user-vector.jpeg9eb2818f-6e5a-4add-a4b0-844a1aa16bbb?alt=media&token=007da904-25a0-40f9-a642-19deb1b48841';

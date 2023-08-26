@@ -1,4 +1,4 @@
-import { LatLng, LatLngBounds } from 'leaflet';
+import { LatLngBounds } from 'leaflet';
 import { jobsCollection } from './../jobs.collection';
 import { getDocs, query, where } from "firebase/firestore";
 import { getUserById } from '../../users/get/getUserById';
@@ -10,27 +10,31 @@ export const getNearJobs = async (mapBounds:LatLngBounds) => {
             where('location._lat',">=",mapBounds.getSouth()),
             where('location._lat',"<=",mapBounds.getNorth()),
         );
- 
+
         const docs = (await getDocs(q)).docs;
-        const jobs = docs.map(jobDoc => {
+        const filteredDocs = docs.map(jobDoc => {
             if(jobDoc.data()?.location._long >= mapBounds.getWest() 
-               && jobDoc.data()?.location._long <= mapBounds.getEast()){
-                return jobDoc.data();
+               && jobDoc.data()?.location._long <= mapBounds.getEast()
+               && jobDoc.data()?.status !== 'done'
+               && jobDoc.data()?.status !== 'deactivated'){
+                return jobDoc;
             }
-        }).filter(job => job);
-       
+        }).filter(doc => doc);
+
+        const jobs = filteredDocs.map(doc => doc?.data());
+
         const creatorsQ = jobs.map(async (job) => job && await getUserById(job.creator));
         const categoriesQ = jobs.map(async (job) => job && await getCategoryById(job.category));
         const creators = await Promise.all(creatorsQ);
         const categories = await Promise.all(categoriesQ);
+
         jobs.forEach(async (job,i) => {
             if(job){
-                job.id = docs[i].id;
+                job.id = filteredDocs[i]?.id;
                 job.creator = creators[i];
                 job.category = categories[i];
             }
         });
-
         return jobs;
     }catch(err){
         console.error(err);

@@ -32,11 +32,8 @@ const LocationPicker:React.FC<LocationPickerProps> = ({pickedLocation,setLocatio
     useMapEvents({
       click(e) { 
         setLocation(e.latlng);
-        console.log(e.latlng);
       },
-      zoom(e){
-        console.log('zoom',e)
-      }
+
     });
     
     const icon = new Icon({

@@ -6,12 +6,18 @@ import { getCategoriesByName } from "./firebase/db/categories/get/getCategoriesB
 import { getJobs } from "./firebase/db/jobs/get/getJobs"
 import { getUsers } from "./firebase/db/users/get/getUsers"
 import { googleAuthProvider } from "./firebase/firebaseInit"
-import { RoutesSwitch } from "./helpers/routes"
+import { RoutesSwitch } from "./consts/routes"
+import { useAppSelector } from "./hooks/redux"
 import { AuthProvider } from "./providers/authProvider"
+import { onSnapshot } from "firebase/firestore"
+import { usersCollection } from "./firebase/db/users/users.collection"
 
 export const App = () => {
-  onAuthStateChanged(googleAuthProvider,() => console.log('authed user',googleAuthProvider.currentUser))
+  // onAuthStateChanged(googleAuthProvider,() => console.log('authed user',googleAuthProvider.currentUser))
+  const user = useAppSelector(state => state.user);
+  // console.log(user)
   useEffect(() => {
+    
     // getUsers().then((data) => console.log(data));
     // getJobs().then(a => console.log(a));
     // getCategoriesByName('leaf').then(s => console.log("999",s));
@@ -19,12 +25,12 @@ export const App = () => {
 
   return (
     <>
-      <AuthProvider>
-        <Normalize/>
-        <Layout>
+      <Normalize/>
+      <Layout>
+        <AuthProvider>
           <RoutesSwitch/>
-        </Layout>
-      </AuthProvider>
+        </AuthProvider>
+      </Layout>
     </>
   )
 }

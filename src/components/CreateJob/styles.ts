@@ -11,21 +11,24 @@ export const Container = styled.div`
 `;
 
 export const Header = styled.div`
-    width:100%;
     height:7vh;
-    background-color:white;
+    background-color:rgb(19,21,27);
     display:flex;
     align-items:center;
     gap:10px;
+    width:50%;
+    color:white;
     position:fixed;
     top:0;
+    z-index:1500;
 `;
 
 export const BackButton = styled.button`
     padding:10px;
-    border-radius:50%;
     background-color:transparent;
     font-size:20px;
+    border:none;
+    color:white;
 `;
 
 export const LeavePage = styled(Link)`
@@ -34,6 +37,7 @@ export const LeavePage = styled(Link)`
     background-color:transparent;
     font-size:20px; 
     text-decoration:none;
+    color:white;
 `;
 
 export const StepTitle = styled.h1`
@@ -44,7 +48,7 @@ export const StepTitle = styled.h1`
 export const ConfirmLocationButton = styled.p`
     margin:0;
     font-size:20px;
-    width: 100vw;
+    width: 100%;
     height: 50px;
     background-color:#56d660;
     border:none;

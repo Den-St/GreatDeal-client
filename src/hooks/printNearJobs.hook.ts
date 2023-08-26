@@ -7,26 +7,25 @@ export const usePrintNearJobs = () => {
   const [jobs,setJobs] = useState<JobT[]>([]);
   const [jobsLoading,setLoading] = useState(true);
   const [mapBounds,setMapBounds] = useState<LatLngBounds | null>(null);
-  const [zoom,setZoom] = useState<number>(13);
+  const [zoom,setZoom] = useState<number>(14);
   
-  console.log(zoom);
   const fetch = async () => {
     if(!mapBounds) return
     try{
-        if(!mapBounds) setLoading(true);
-        if(zoom >= 13) {
-          const res = await getNearJobs(mapBounds) as JobT[];
-          if(!res) return;
-          setJobs(res);
-        }
-        setLoading(false);
+      if(!mapBounds) setLoading(true);
+      if(zoom >= 14) {
+        const res = await getNearJobs(mapBounds) as JobT[];
+        if(!res) return;
+        setJobs(prev => [...prev,...res.filter(job => !prev.some(prevJob => prevJob.id === job.id))]);
+      } 
+      setLoading(false);
     }catch(err){
-        console.error(err);
+      console.error(err);
     }
   }
   useEffect(() => {
     fetch();
   },[mapBounds]);
 
-  return {jobs,jobsLoading,setMapBounds,setZoom};
+  return {jobs,jobsLoading,setMapBounds,setZoom,zoom};
 }

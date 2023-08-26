@@ -3,4 +3,7 @@ export enum collectionsKeys {
     jobs = "jobs",
     categories = "categories",
     jobRequests = "jobRequests",
+    chatRooms = "chatRooms",
+    messages = "messages",
+    receipts = "receipts",
 };

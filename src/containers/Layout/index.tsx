@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { BottomNavMenu } from "../../components/BottomNavMenu";
-import { routes } from "../../helpers/routes";
+import { routes ,navRoutes} from "../../consts/routes";
 import { Container, Main, Bottom } from "./styles"
 
 type Props = {
@@ -8,14 +8,14 @@ type Props = {
 }
 
 export const Layout:React.FC<Props> = ({children}) => {
-    const excludedRoutes =  [routes.registration, routes.login, routes.createJob];
+    const excludedRoutes =  [routes.registration, routes.login, navRoutes.createJob.route, '/chat'];
     const route = useLocation().pathname;
-    
+
     return <Container>
         <Main>
             {children}
         </Main>
-        {!excludedRoutes.includes(route) && <Bottom>
+        {!excludedRoutes.some(exRoute => route.includes(exRoute)) && <Bottom>
             <BottomNavMenu/>
         </Bottom>}
     </Container>

@@ -5,6 +5,7 @@ import { UserLocationLoader } from "../../assets/UserLocationLoader";
 import { CreateJobForm } from "./Form";
 import { useCreateJob } from "../../hooks/createJob.hook";
 import { useSearchCategories } from "../../hooks/searchCategories.hook";
+import { Spin } from "antd";
 
 export const CreateJob = () => {
     const {pickedLocation,setLocation,step,userLocationLoading,success,
@@ -20,7 +21,7 @@ export const CreateJob = () => {
         {
             component:<CreateJobForm searchCategories={debounceSearchCategories} categories={categories}
              onSubmit={onSubmit} categoriesLoading={categoriesLoading} chosenCategory={category}
-             onChangeCategory={onChangeCategory} success={success}/>,
+             onChangeCategory={onChangeCategory} success={success} pickedLocation={pickedLocation}/>,
             title:"Fill the form"
         }
     ];
@@ -31,7 +32,7 @@ export const CreateJob = () => {
                         : <LeavePage to={'/'}><ArrowLeftOutlined /></LeavePage>}
             <StepTitle>{steps[step - 1].title}</StepTitle>
         </Header>
-        {userLocationLoading && !pickedLocation && <UserLocationLoader>Loading map...</UserLocationLoader>}
+        {userLocationLoading && !pickedLocation && <UserLocationLoader><Spin /></UserLocationLoader>}
         {steps[step - 1].component}
         {step === 1 && !!pickedLocation && <ConfirmLocationButton onClick={nextStep}>Confirm location</ConfirmLocationButton>}
     </Container>

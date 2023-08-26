@@ -1,6 +1,7 @@
-import { Icon, LatLng, LatLngBounds } from "leaflet";
+import { Icon, LatLng } from "leaflet";
 import { useState, useEffect } from "react";
 import { useMapEvents, Marker, Popup } from "react-leaflet";
+import { useUserGeoLocation } from "../../hooks/userGeoLocation.hook";
 
 type Props = {
   setUserLocationLoading:(val:boolean) => void,
@@ -8,7 +9,8 @@ type Props = {
 }
 
 export const MyLocationMarker:React.FC<Props> = ({setUserLocationLoading,setUserLocation}) => {
-    const [position, setPosition] = useState<LatLng | null>(null)
+    const {position,setPosition} = useUserGeoLocation();
+    
     const map = useMapEvents({
       locationfound(e) {
         setPosition(e.latlng);
@@ -19,7 +21,7 @@ export const MyLocationMarker:React.FC<Props> = ({setUserLocationLoading,setUser
     });
 
     const icon = new Icon({
-      iconUrl:'https://img.icons8.com/?size=512&id=7880&format=png',
+      iconUrl:'https://img.icons8.com/?size=512&id=7880&format=png&color=FFFFFF',
       iconSize:[30,30]
     });
 

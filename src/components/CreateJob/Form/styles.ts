@@ -1,14 +1,87 @@
 import styled from "styled-components";
 
 export const Container = styled.form`
-    width: 100vw;
-    height: 93vh;
+    width: 100%;
     display:flex;
     flex-direction:column;
-    padding-left:10px;
     box-sizing:border-box;
     padding-top:20px;
     gap:5px;
+    overflow:scroll;
+    background:rgb(31,32,36);
+    color:white;
+    height:100%;
+    .ant-carousel{
+        display:unset;
+    }
+    .leaflet-container{
+        height:15vh;
+    }
+    .leaflet-bottom {
+        display:none;
+    }
+    .ant-image-img{
+        width:160px;
+        height:160px;
+        object-fit:contain;
+    }
+    .slick-current{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:rgb(31,32,36);
+        opacity:0.9;
+    }
+    .slick-active{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:rgb(31,32,36);
+        opacity:0.9;
+    }
+    .slick-slide{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:rgb(31,32,36);
+        opacity:0.9;
+        position:relative;
+    }
+    :where(.css-dev-only-do-not-override-1m62vyb).ant-carousel .slick-initialized .slick-slide {
+        display: flex;
+    }
+    .leaflet-bottom{
+        display:none;
+    }
+    .leaflet-container a{
+        color:white;
+    }
+    .leaflet-layer,
+    .leaflet-control-attribution {
+        filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+    }
+    .leaflet-control-zoom-in,
+    .leaflet-control-zoom-out{
+        background:black;
+    }
+    .leaflet-popup ,.leaflet-popup-content-wrapper ,.leaflet-popup-tip ,.leaflet-control-zoom{
+        background:rgb(47,48,53);
+        color:white;
+    }
+`;
+
+export const ImageContainer = styled.div`
+    width:100%;
+`;
+
+export const RemovePhotoButton = styled.span`
+    background:transparent;
+    border:none;
+    outline:none;
+    font-size:25px;
+    position:absolute;
+    padding:5px;
+    color:white;
 `;
 
 export const InputBlock = styled.div`
@@ -20,10 +93,54 @@ export const InputBlock = styled.div`
 
 export const InputHeader = styled.h4`
     margin:0;
-    font-size:20px;
+    font-size:17px;
+`;
+
+export const CategoryIcon = styled.img`
+    width:20px;
+    height:20px;
+    object-fit:contain;
+`;
+
+export const CategoryContainer = styled.div`
+    display:flex;
+    align-items:center;
+    gap:6px;
+`;
+
+export const PhotosInputContainer = styled.div`
+    postion:relative;
+    width:60px;
+    .anticon{
+        position:absolute;
+        padding:5px;
+        font-size:20px;
+        width:50px;
+        background:#1677ff;
+        color:white;
+        border-radius:5px;
+    }
+`;
+
+export const PhotosInput = styled.input`
+    opacity:0;
+    width:60px;
+`;
+
+export const DescriptionTextarea = styled.textarea`
+    width:80%;
 `;
 
 export const CreateButton = styled.input`
     width:100px;
+    background:#1677ff;
+    color:white;
+    outline:none;
+    border:none;
+    border-radius:5px;
+    padding:5px;
     
+    &:hover{
+        opacity:0.9;
+    }
 `;

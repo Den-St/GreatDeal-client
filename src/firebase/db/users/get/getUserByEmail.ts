@@ -6,7 +6,10 @@ export const getUserByEmail = async (email?:string | null) => {
     try{
         const q = query(usersCollection,where('email', "==", email));
         const docs = await getDocs(q);
-        return getFilteredQuery(docs)[0];
+        const userDoc = docs.docs[0];
+        const user = userDoc.data();
+        user.id = userDoc.id;
+        return user;
     }catch(err){
         console.error(err);
     }

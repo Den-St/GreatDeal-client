@@ -4,7 +4,7 @@ import { createUserI } from '../../../../types/user.type';
 
 export const createUser = async (user:createUserI) => {
     try{
-        await addDoc(usersCollection,{...user});
+        await addDoc(usersCollection,{...user,balance:0});
     }catch(err){
         console.error(err);
     }
