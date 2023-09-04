@@ -1,4 +1,3 @@
-import { messageCollection } from './../firebase/db/messages/messageCollection';
 import { useAppSelector } from './redux';
 import { createMessage } from './../firebase/db/messages/create/create';
 import { MessageT, CreateMessageFormT } from './../types/message.type';
@@ -12,6 +11,7 @@ import { setLastMessage } from '../firebase/db/chatRooms/patch/setLastMessage';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { storage } from '../firebase/firebaseInit';
 import {v4} from 'uuid';
+import { messageCollection } from '../firebase/db/messages/get/messageCollection';
 
 export const useChatRoom = (clearInputs:() => void) => {
     const chatRoomId = useParams().id;

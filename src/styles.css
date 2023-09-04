@@ -1,0 +1,6 @@
+.ant-modal, .ant-modal-close, .ant-modal-content{
+    background-color:rgb(47,48,53) !important;
+    color:white;
+    padding:0;
+    border-radius:10px;
+}

@@ -82,7 +82,7 @@ export const MessagesContainer = styled.div`
     gap:5px;
     padding:5px 15px 5px 5px;
     box-sizing:border-box;
-    height:78vh;
+    height:79vh;
     overflow-y:scroll;
     background:rgb(32,32,36);
     

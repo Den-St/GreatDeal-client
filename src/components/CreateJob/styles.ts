@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
+import { Media } from '../../assets/breakpoints';
 
 export const Container = styled.div`
     width:100%;
@@ -17,6 +18,9 @@ export const Header = styled.div`
     align-items:center;
     gap:10px;
     width:50%;
+    ${Media.down.m}{
+        width:100%;
+    }
     color:white;
     position:fixed;
     top:0;

@@ -9,9 +9,10 @@ import { googleAuthProvider } from "./firebase/firebaseInit"
 import { RoutesSwitch } from "./consts/routes"
 import { useAppSelector } from "./hooks/redux"
 import { AuthProvider } from "./providers/authProvider"
-import { onSnapshot } from "firebase/firestore"
-import { usersCollection } from "./firebase/db/users/users.collection"
-
+import "./styles.css";
+import { AdminRoutesSwitch } from "./admin/routes"
+import { useLocation, useParams } from "react-router-dom"
+import { AdminPanelLayout } from "./admin/components/Layout"
 export const App = () => {
   // onAuthStateChanged(googleAuthProvider,() => console.log('authed user',googleAuthProvider.currentUser))
   const user = useAppSelector(state => state.user);
@@ -22,15 +23,21 @@ export const App = () => {
     // getJobs().then(a => console.log(a));
     // getCategoriesByName('leaf').then(s => console.log("999",s));
   },[]);
-
+  const path = useLocation().pathname;
+  
   return (
     <>
       <Normalize/>
-      <Layout>
+      {!path.includes('admin') ? <Layout>
         <AuthProvider>
           <RoutesSwitch/>
         </AuthProvider>
       </Layout>
+      : <AdminPanelLayout>
+          <AuthProvider>
+            <AdminRoutesSwitch/>
+          </AuthProvider>
+        </AdminPanelLayout>}
     </>
   )
 }

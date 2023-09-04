@@ -1,4 +1,4 @@
-import { Button, Skeleton, Space, Spin, Tag } from 'antd'
+import { Button, Empty, Skeleton, Space, Spin, Tag } from 'antd'
 import {CheckOutlined} from "@ant-design/icons";
 import React from 'react'
 import { Display } from '../../../assets/Display'
@@ -30,12 +30,12 @@ export const CreatorJobRequests:React.FC<Props> = ({creatorJobRequests,creatorJo
         <JobTitle to={'/job/'+req.job.id}>{req.job.title}</JobTitle>
       </Space>
     </Space>
-    {req.status === 'active' ? <>
+    {req.status === 'active' ? <Display direction='column' gap={'10px'} padding={'10px 0px'}>
       <Button type='primary' onClick={() => onChangeRequestStatus(req,'approved')}>approve</Button>
       <Button danger onClick={() => onChangeRequestStatus(req,'rejected')}>reject</Button>
-    </> : <Display height='100%' align='center'><Tag style={{'fontSize':'15px','padding':'3px','boxSizing':'border-box','height':'fit-content'}} icon={<CheckOutlined/>} color="success">Approved</Tag></Display>}
+    </Display> : <Display height='100%' align='center'><Tag style={{'fontSize':'15px','padding':'3px','boxSizing':'border-box','height':'fit-content'}} icon={<CheckOutlined/>} color="success">Approved</Tag></Display>}
   </ItemContainer>)
   : <Display height="100%" width="100%" justify="center" align="center"><Spin/></Display>}
-    {!creatorJobRequestsLoading && !creatorJobRequests.length && <Tag style={{'fontSize':"30px","padding":"15px",textAlign:'center'}}>No requests</Tag>}
+    {!creatorJobRequestsLoading && !creatorJobRequests.length && <Empty description={'No requests'} image={Empty.PRESENTED_IMAGE_SIMPLE} />}
 </ItemsContainer>
 }

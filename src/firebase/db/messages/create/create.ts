@@ -1,6 +1,6 @@
+import { messageCollection } from './../get/messageCollection';
 import { addDoc } from "firebase/firestore";
 import { CreateMessageT } from "../../../../types/message.type";
-import { messageCollection } from "../messageCollection";
 
 export const createMessage = async (data:CreateMessageT) => {
     try{

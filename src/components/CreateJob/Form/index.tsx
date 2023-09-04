@@ -99,7 +99,7 @@ export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,s
                 {categories && categories.map(category => 
                     <Option key={category.id} value={JSON.stringify(category)}>
                         <CategoryContainer>
-                            <CategoryIcon src={category.iconUrl}/>
+                            <CategoryIcon src={category.iconUrl.replace('FFFFFF',"000000")}/>
                             {category.name}
                         </CategoryContainer>
                     </Option>

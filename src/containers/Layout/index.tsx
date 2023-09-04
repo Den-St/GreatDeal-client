@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const Layout:React.FC<Props> = ({children}) => {
-    const excludedRoutes =  [routes.registration, routes.login, navRoutes.createJob.route, '/chat'];
+    const excludedRoutes =  [routes.registration, routes.login, navRoutes.createJob.route, '/chat', '/userReport', '/job/'];
     const route = useLocation().pathname;
 
     return <Container>

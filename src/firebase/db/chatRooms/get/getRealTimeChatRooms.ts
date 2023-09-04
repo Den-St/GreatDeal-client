@@ -3,7 +3,7 @@ import { getUserById } from './../../users/get/getUserById';
 import { query, or, where, onSnapshot } from "firebase/firestore";
 import { ChatRoomT } from "../../../../types/chatRoom.type";
 import { chatRoomsCollection } from "../chatRooms.collection";
-import { getMessageById } from '../../messages/getMessageById';
+import { getMessageById } from '../../messages/get/getMessageById';
 
 export const getRealTimeChatRooms = (userId:string) => {
     try{

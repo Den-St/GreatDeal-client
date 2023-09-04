@@ -1,10 +1,10 @@
-import { Button, Rate, Row, Skeleton, Space, Spin } from "antd";
+import { Button, Dropdown, MenuProps, Rate, Row, Skeleton, Space, Spin } from "antd";
 import { useEffect, useRef, useState } from "react";
 import { useChatRoom } from "../../hooks/chatRoom";
 import { NotYourMessage } from "./NotYourMessage";
 import { Avatar, Container, CreateButton, CreateMessageContainer, HeaderContainer, JobInfoContainer, MessagesContainer, UserInfo, UserName, LeavePage, ConfirmContainer, ImagePreviewContainer, RemoveImage, ImageContainer, DoneButton, Back, ConfirmButton, FileInputContainer, MessageTextInput, MessageInputValue, CreateReviewContainer, InputHeader, InputBlock } from "./styles";
 import { YourMessage } from "./YourMessage";
-import {ArrowLeftOutlined,CloseCircleOutlined,CheckOutlined,UploadOutlined} from "@ant-design/icons";
+import {ArrowLeftOutlined,CloseCircleOutlined,CheckOutlined,UploadOutlined,MoreOutlined} from "@ant-design/icons";
 import { useDoneJob } from "../../hooks/doneJob.hook";
 import { navRoutes } from "../../consts/routes";
 import { Navigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import { CreateMessageFormT } from "../../types/message.type";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import {Image} from "antd";
 import { Display } from "../../assets/Display";
+import { ReportForm } from "../ReportForm";
 
 export const ChatRoom = () => {
     const {
@@ -29,11 +30,21 @@ export const ChatRoom = () => {
     }
     const {messages,messagesLoading,chatRoom,chatRoomLoading,onCreateMessage,userId} = useChatRoom(clearInputs);
     const {onDoneJob,isOnDoneJob,rate,setRate,confirmDoneJob,leaveDoneJob,isWorkFinished,review,setReview} = useDoneJob();
+    const [isOnReport,setIsOnReport] = useState(false);
+    
+    const menu: MenuProps['items'] = [
+        {
+          label: <Button onClick={() => setIsOnReport(true)} danger>Report</Button>,
+          key: '0',
+        },
+    ];
 
     const removeImage = (image:File) => {
         setValue('images',watch('images')?.filter(file => file.name !== image.name && file.lastModified !== image.lastModified) || []);
     }
     if(isWorkFinished) return <Navigate to={'/'}/>
+
+    if(isOnReport && chatRoom?.jobCreator.id && chatRoom?.worker.id) return <ReportForm leave={() => setIsOnReport(false)} suspect={chatRoom?.jobCreator.id === userId ? chatRoom?.worker.id : chatRoom?.jobCreator.id} chat={chatRoom?.id}/>
 
     if(isOnDoneJob) return <ConfirmContainer>
         <Back onClick={() => leaveDoneJob()}>
@@ -59,18 +70,25 @@ export const ChatRoom = () => {
                 <ArrowLeftOutlined/>
             </LeavePage>
             {!chatRoomLoading ? chatRoom?.jobCreator.id === userId 
-            ? <UserInfo to={'/user/'+chatRoom?.worker.id}>
+            ? <Display width="100%" align="center" gap="10px">
+              <UserInfo to={'/user/'+chatRoom?.worker.id}>
                 <Avatar src={chatRoom?.worker.photoURL || defaultAvatar}/>
-                <UserName>{chatRoom?.worker.displayName || 'user' + chatRoom?.worker.id}</UserName>
+                <UserName>{chatRoom?.worker.displayName || 'user ' + chatRoom?.worker.id}</UserName>
               </UserInfo>
-            : <UserInfo to={'/user/'+chatRoom?.jobCreator.id}>
+              <Dropdown menu={{items: menu}} trigger={['click']}><Button style={{'fontSize':'20px','border':'none',padding:'none'}} ghost type={'dashed'}><MoreOutlined /></Button></Dropdown>
+              </Display>
+            : <Display width="100%" align="center" gap="10px">
+              <UserInfo to={'/user/'+chatRoom?.jobCreator.id}>
                 <Avatar src={chatRoom?.jobCreator.photoURL || defaultAvatar}/>
-                <UserName>{chatRoom?.jobCreator.displayName || 'user' + chatRoom?.jobCreator.id}</UserName>
+                <UserName>{chatRoom?.jobCreator.displayName || 'user ' + chatRoom?.jobCreator.id}</UserName>
               </UserInfo> 
+              <Dropdown menu={{items: menu}} trigger={['click']}><Button style={{'fontSize':'20px','border':'none',padding:'none'}} ghost type={'dashed'}><MoreOutlined /></Button></Dropdown>
+              </Display>
               : <Space>
                     <Skeleton.Avatar size={'default'}/>
                     <Skeleton.Button size={'default'}/>
                 </Space>}
+
         </HeaderContainer>
         
         <JobInfoContainer>

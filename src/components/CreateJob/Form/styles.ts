@@ -94,6 +94,7 @@ export const InputBlock = styled.div`
 export const InputHeader = styled.h4`
     margin:0;
     font-size:17px;
+    color:white;
 `;
 
 export const CategoryIcon = styled.img`

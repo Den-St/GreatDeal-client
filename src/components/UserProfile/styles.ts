@@ -21,6 +21,10 @@ export const Container = styled.div`
     :where(.css-dev-only-do-not-override-1m62vyb).ant-tabs{
         color:white;
     }
+    .ant-empty-normal .ant-empty-description {
+        color: white;
+        font-size:25px;
+    }
 `;
 
 export const UserInfoContainer = styled.div`

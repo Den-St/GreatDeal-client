@@ -33,6 +33,10 @@ export const ItemsContainer = styled.div`
     overflow:scroll;
     height:410px;
     color:white;
+    .ant-empty-normal .ant-empty-description {
+        color: white;
+        font-size:25px;
+    }
 `;
 
 export const Approved = styled.span`

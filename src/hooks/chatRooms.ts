@@ -4,8 +4,8 @@ import { chatRoomsCollection } from "../firebase/db/chatRooms/chatRooms.collecti
 import { ChatRoomT } from "../types/chatRoom.type"
 import { useAppSelector } from "./redux";
 import { getJobById } from '../firebase/db/jobs/get/getJobById';
-import { getMessageById } from '../firebase/db/messages/getMessageById';
 import { getUserById } from '../firebase/db/users/get/getUserById';
+import { getMessageById } from "../firebase/db/messages/get/getMessageById";
 
 export const useChatRooms = () => {
     const [chatRooms,setChatRooms] = useState<ChatRoomT[]>([])
@@ -15,6 +15,7 @@ export const useChatRooms = () => {
     const fetch = () => {
         const q = query(chatRoomsCollection,or(where('worker','==',userId),where('jobCreator','==',userId)));
         onSnapshot(q,async (snapshot) => {
+            console.log('chat updated')
             let _chatRooms:any[] = [];
             const docs = snapshot.docs;
             _chatRooms = docs.map(doc => doc.data());

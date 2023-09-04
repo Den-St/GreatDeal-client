@@ -6,4 +6,7 @@ export enum collectionsKeys {
     chatRooms = "chatRooms",
     messages = "messages",
     receipts = "receipts",
+    reportCategories = "reportCategories",
+    reports = "reports",
+    reportResults = "reportResults"
 };

@@ -1,8 +1,8 @@
-import { getUserById } from './../users/get/getUserById';
 import { doc, getDoc } from "firebase/firestore";
-import { MessageT } from "../../../types/message.type";
-import { db } from "../../firebaseInit";
-import { collectionsKeys } from "../collectionsKeys";
+import { MessageT } from "../../../../types/message.type";
+import { db } from "../../../firebaseInit";
+import { collectionsKeys } from "../../collectionsKeys";
+import { getUserById } from "../../users/get/getUserById";
 
 export const getMessageById = async (messageId:string) => {
     if(!messageId) return;

@@ -1,4 +1,4 @@
-import { Button, Skeleton, Tag } from "antd";
+import { Button, Skeleton, Spin, Tag } from "antd";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { useSendJobRequest } from "../../hooks/jobPopup.hook";
 import { JobT } from "../../types/job.type"
@@ -27,7 +27,7 @@ export const JobPopup:React.FC<Props> = ({job}) => {
                 ? <Tag color={'gray'}>you are creator</Tag>
                 : alreadyHave ? <Tag color={'gray'}>already aplied</Tag> : <Button onClick={() => onSendJobRequest(job)} type={'primary'}>Send</Button>}
             </>
-             : <Skeleton/>}
+             : <Spin/>}
         </BottomContainer>
     </Container>
 }

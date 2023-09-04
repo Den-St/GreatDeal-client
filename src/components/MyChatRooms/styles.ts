@@ -10,6 +10,10 @@ export const Container = styled.div`
     box-sizing:border-box;
     overflow: scroll;
     background:rgb(31,32,36);
+    .ant-empty-normal .ant-empty-description {
+        color: white;
+        font-size:25px;
+    }
 `;
 
 export const ChatRoomContainer = styled(Link)`

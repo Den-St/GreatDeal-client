@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 export const Container = styled.div`
     width: 100%;
-    height:90vh;
+    height:100vh;
     gap:5px;
     display:flex;
     color:white;
     flex-direction:column;
+    box-sizing:border-box;
     .leaflet-container{
         height:20vh;
     }

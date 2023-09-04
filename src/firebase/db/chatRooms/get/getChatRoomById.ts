@@ -1,10 +1,10 @@
-import { getMessageById } from './../../messages/getMessageById';
 import { getJobById } from './../../jobs/get/getJobById';
 import { getUserById } from './../../users/get/getUserById';
 import { doc, getDoc } from "firebase/firestore";
 import { ChatRoomT } from "../../../../types/chatRoom.type";
 import { db } from "../../../firebaseInit";
 import { collectionsKeys } from "../../collectionsKeys";
+import { getMessageById } from '../../messages/get/getMessageById';
 
 export const getChatRoomById = async (id:string) => {
     try{

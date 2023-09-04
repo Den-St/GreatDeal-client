@@ -9,6 +9,10 @@ export const Container = styled.div`
     .leaflet-container a{
         color:white;
     }
+    .leaflet-container a:focus{
+        background:green;
+        color:green;
+    }
     .leaflet-fade-anim .leaflet-popup {
         transition: none;
     }
@@ -17,7 +21,7 @@ export const Container = styled.div`
     }
     .leaflet-layer,
     .leaflet-control-attribution {
-        filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+        filter: invert(100%) hue-rotate(180deg) brightness(100%) contrast(80%);
     }
     .leaflet-control-zoom-in,
     .leaflet-control-zoom-out{

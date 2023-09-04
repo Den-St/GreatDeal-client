@@ -2,7 +2,7 @@ import { useUserProfile } from "../../hooks/userProfile";
 import { Container, UserInfoContainer, UserName, Reviews } from "./styles"
 import {StarFilled} from "@ant-design/icons";
 import { defaultAvatar } from "../../consts/defaultAvatar";
-import { Col, Row, Skeleton, Space, Spin, Statistic, Tag } from "antd";
+import { Col, Divider, Empty, Row, Skeleton, Space, Spin, Statistic, Tag } from "antd";
 import { Avatar } from "../ChatRoom/styles";
 import { Rate, ReviewCreatorName, ReviewText } from "../MyProfilePage/styles";
 
@@ -28,6 +28,7 @@ export const UserProfile = () => {
                 <Statistic title="Fdsfsd" value={45} loading={loading.stats}/>
             </Col>
         </Row>
+        <Divider/>
         <Reviews>
             {!loading.stats ? reviews.map(review => 
                 <Space style={{'background':'#2f3035','padding':'5px'}} direction="vertical">
@@ -38,8 +39,8 @@ export const UserProfile = () => {
                     </Space>
                     <ReviewText>{review.review}</ReviewText>
                 </Space>
-            ) : <Skeleton/>}
+            ) : <Spin/>}
         </Reviews>
-        {!loading.stats && !reviews.length && <Tag style={{'fontSize':"30px","padding":"15px",textAlign:'center'}}>No reviews</Tag>}
+        {!loading.stats && !reviews.length && <Empty description={'No reviews'} image={Empty.PRESENTED_IMAGE_SIMPLE} />}
     </Container>
 }

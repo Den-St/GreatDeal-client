@@ -6,6 +6,7 @@ import { Login } from "../containers/Login";
 import Registration from "../containers/Registration/index";
 import {CommentOutlined,PlusCircleOutlined,SearchOutlined,EnvironmentOutlined,IdcardOutlined} from '@ant-design/icons';
 import { UserProfile } from "../components/UserProfile";
+import { ReportForm } from "../components/ReportForm";
 
 export const navRoutes = {
     home:{
@@ -33,6 +34,7 @@ export const navRoutes = {
         label:'My Profile',
         icon:<IdcardOutlined />
     },
+
 }
 export const routes = {
     registration:"/registration",

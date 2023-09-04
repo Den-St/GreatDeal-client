@@ -1,4 +1,4 @@
-import { Button, Skeleton, Space, Spin, Tag } from "antd";
+import { Button, Empty, Skeleton, Space, Spin, Tag } from "antd";
 import { Display } from "../../../assets/Display";
 import { useJobStatusController } from "../../../hooks/jobStatusController.hook"
 import { JobStatusT, JobT } from "../../../types/job.type"
@@ -31,6 +31,6 @@ export const JobsDirectory:React.FC<Props> = ({jobs,jobsLoading,refetch}) => {
         </Space>
     </Space>)
     : <Display height="100%" width="100%" justify="center" align="center"><Spin/></Display>}
-    {!jobsLoading && !jobs.length && <Tag style={{'fontSize':"30px","padding":"15px",textAlign:'center'}}>No jobs</Tag>}
+    {!jobsLoading && !jobs.length && <Empty description={'No jobs'} image={Empty.PRESENTED_IMAGE_SIMPLE} />}
 </ItemsContainer>
 }

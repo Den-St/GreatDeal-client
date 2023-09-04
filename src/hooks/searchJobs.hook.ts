@@ -6,8 +6,8 @@ import { CategoryT } from "../types/category.type";
 import { getJobsByFilters } from "../firebase/db/jobs/get/getJobsByFilters";
 import { LocationT } from '../types/location.type';
 
-export const useSearchJobs = () => {
-  const [jobs,setJobs] = useState<JobT[]>([]);
+export const useSearchJobs = (setJobs:(jobs:JobT[]) => void) => {
+  // const [jobs,setJobs] = useState<JobT[]>([]);
   const [jobsLoading,setJobsLoading] = useState(true);
   const [category,setCategory] = useState<CategoryT | null>(null);
   const [rewardMin,setRewardMin] = useState(0);
@@ -60,6 +60,6 @@ export const useSearchJobs = () => {
     debounceSearchJobs(title,category,rewardMin,isNearJob,userLocation);
   },[userLocation]);
 
-  return {debounceSearchJobs,onChangeCategory,jobs,category,jobsLoading,title,rewardMin,
+  return {debounceSearchJobs,onChangeCategory,category,jobsLoading,title,rewardMin,
           onChangeRewardMin,onClearCategory,onChangeTitle,onChangeNearJob,isNearJob};
 }

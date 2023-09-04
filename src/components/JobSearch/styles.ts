@@ -11,6 +11,15 @@ export const Container = styled.div`
     flex-direction:column;
     align-items:center;
     gap:15px;
+    :where(.css-dev-only-do-not-override-1m62vyb).ant-modal{
+        background-color:rgb(47,48,53);
+    }
+    :where(.css-dev-only-do-not-override-1m62vyb).ant-modal .ant-modal-close{
+        color:white;
+    }
+    :where(.css-dev-only-do-not-override-1m62vyb).ant-modal{
+        padding:0;
+    }
 `;
 
 export const Wrapper = styled.div`
@@ -46,9 +55,10 @@ export const OpenFiltersButton = styled.div`
 export const JobsContainer = styled.div`
     display:flex;
     flex-direction:column;
-    gap:5px;
+    gap:15px;
+    padding:10px 0;
     overflow:scroll;
-    height: 275px;
+    height: 575px;
     width:100%;
     border-radius:5px;
     background:rgb(19,21,27)
@@ -58,6 +68,8 @@ export const JobItemContainer = styled.div`
     width:100%;
     display:flex;
     gap:5px;
+    padding:5px;
+    box-sizing:border-box;
 `;
 export const CategoryIcon = styled.img`
     width:30px;
