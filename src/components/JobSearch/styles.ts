@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Media } from "../../assets/breakpoints";
 
 export const Container = styled.div`
     padding:10px 0px;

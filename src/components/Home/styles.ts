@@ -1,17 +1,25 @@
 import styled from "styled-components";
+import { Media } from "../../assets/breakpoints";
 
 export const Container = styled.div`
     width:100%;
-    height:90vh;
     .leaflet-container{
         height:90vh;
     }
+    ${Media.down.m}{
+        height: 84%;
+    }
     .leaflet-container a{
         color:white;
+        -webkit-tap-highlight-color:transparent !important;
     }
-    .leaflet-container a:focus{
-        background:green;
-        color:green;
+    .leaflet-container a:active{
+        background:transparent !important;
+        color:white !important;
+    }
+    .leaflet-container a::hover{
+        background:transparent !important;
+        color:white !important;
     }
     .leaflet-fade-anim .leaflet-popup {
         transition: none;

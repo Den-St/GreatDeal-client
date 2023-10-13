@@ -9,6 +9,10 @@ export const Container = styled.div`
     flex-direction:column;
     padding-top:7vh;
     box-sizing:border-box;
+    background:rgb(31,32,36);
+    .ant-carousel .slick-list .slick-slide.slick-active{
+        display:flex;
+    }
 `;
 
 export const Header = styled.div`
@@ -60,9 +64,8 @@ export const ConfirmLocationButton = styled.p`
     display:flex;
     align-items:center;
     justify-content:center;
-
-    position:absolute;
     top:calc(100vh - 50px);
+    position:absolute;
     left:0;
     z-index:1001;
 `;

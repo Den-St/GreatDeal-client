@@ -10,7 +10,6 @@ export const Container = styled.form`
     overflow:scroll;
     background:rgb(31,32,36);
     color:white;
-    height:100%;
     .ant-carousel{
         display:unset;
     }

@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { MyChatRooms, ChatRoom, CreateJob, JobSearch, MyProfilePage } from "./../pages";
 import { Home } from "../containers/Home";
 import { JobPage } from "../containers/JobPage";
@@ -42,7 +42,12 @@ export const routes = {
     job:`/job/:id`,
     user:`/user/:id`,
     chat:`/chat/:id`,
+    githubPage:'/GreatDeal-client'
 };
+
+const GitHubPages = () => {
+    return <Navigate to={'/'}/>
+}
 
 export const PublicRoutes = [
     <Route key={navRoutes.home.route} element={<Home/>} path={navRoutes.home.route}/>,
@@ -55,6 +60,8 @@ export const PublicRoutes = [
     <Route key={navRoutes.myChatrooms.route} element={<MyChatRooms/>} path={navRoutes.myChatrooms.route}/>,
     <Route key={routes.chat} element={<ChatRoom/>} path={routes.chat}/>,
     <Route key={routes.user} element={<UserProfile/>} path={routes.user}/>,
+
+    <Route key={routes.githubPage} element={<GitHubPages/>} path={routes.githubPage}/>,
 ]
 
 export const RoutesSwitch = () => {
