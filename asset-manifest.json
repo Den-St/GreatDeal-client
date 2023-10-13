@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/GreatDeal-client/static/css/main.247e8f13.css",
+    "main.js": "/GreatDeal-client/static/js/main.313e3682.js",
+    "index.html": "/GreatDeal-client/index.html",
+    "main.247e8f13.css.map": "/GreatDeal-client/static/css/main.247e8f13.css.map",
+    "main.313e3682.js.map": "/GreatDeal-client/static/js/main.313e3682.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.247e8f13.css",
+    "static/js/main.313e3682.js"
+  ]
+}
