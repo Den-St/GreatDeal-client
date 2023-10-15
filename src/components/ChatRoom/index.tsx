@@ -141,39 +141,11 @@ const CreateMessageController:React.FC<CreateMessageProps> = ({register,text,han
     }  
 
     return <CreateMessageContainer onSubmit={handleSubmit(onCreateMessage)} >
-        <MessageTextController onChangeTextInput={onChangeTextInput} text={text}/>
+        <TextArea autoSize={true} onChange={onChangeTextInput} autoComplete={"off"} value={text}/>
         <FileInputContainer>
             <UploadOutlined/>
             <input type={'file'} onChange={onImageChange} multiple={true}/>
         </FileInputContainer>
         <CreateButton type={'submit'} value={'Send'}/>
     </CreateMessageContainer>
-}
-
-type MessageTextControllerProps = {
-    onChangeTextInput:(e: React.ChangeEvent<HTMLTextAreaElement>) => void,
-    text:string
-}
-
-const MessageTextController:React.FC<MessageTextControllerProps> = ({text,onChangeTextInput}) => {
-    const textAreaRef = useRef<HTMLTextAreaElement>(null);
-    const useAutosizeTextArea = (
-        textAreaRef: HTMLTextAreaElement | null,
-        value: string
-    ) => {
-    useEffect(() => {
-        if (textAreaRef) {
-        textAreaRef.style.height = "0px";
-        const scrollHeight = textAreaRef.scrollHeight;
-        textAreaRef.style.height = scrollHeight + "px";
-        }
-    }, [textAreaRef, value]);
-    };
-
-    useAutosizeTextArea(textAreaRef.current,text);
-    return <>
-        <MessageTextInput onChange={onChangeTextInput}
-            autoComplete={"off"} value={text} ref={textAreaRef}/>
-        <MessageInputValue>{text}</MessageInputValue>
-    </>
 }

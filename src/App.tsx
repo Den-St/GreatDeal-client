@@ -16,7 +16,7 @@ import { AdminPanelLayout } from "./admin/components/Layout"
 export const App = () => {
   // onAuthStateChanged(googleAuthProvider,() => console.log('authed user',googleAuthProvider.currentUser))
   const user = useAppSelector(state => state.user);
-  // console.log(user)
+  console.log(user)
   useEffect(() => {
     
     // getUsers().then((data) => console.log(data));

@@ -9,6 +9,7 @@ export const getUserByEmail = async (email?:string | null) => {
         const userDoc = docs.docs[0];
         const user = userDoc.data();
         user.id = userDoc.id;
+        console.log('u',user);
         return user;
     }catch(err){
         console.error(err);
