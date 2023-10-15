@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/GreatDeal-client/static/css/main.247e8f13.css",
-    "main.js": "/GreatDeal-client/static/js/main.313e3682.js",
+    "main.css": "/GreatDeal-client/static/css/main.41093aca.css",
+    "main.js": "/GreatDeal-client/static/js/main.ed75b192.js",
     "index.html": "/GreatDeal-client/index.html",
-    "main.247e8f13.css.map": "/GreatDeal-client/static/css/main.247e8f13.css.map",
-    "main.313e3682.js.map": "/GreatDeal-client/static/js/main.313e3682.js.map"
+    "main.41093aca.css.map": "/GreatDeal-client/static/css/main.41093aca.css.map",
+    "main.ed75b192.js.map": "/GreatDeal-client/static/js/main.ed75b192.js.map"
   },
   "entrypoints": [
-    "static/css/main.247e8f13.css",
-    "static/js/main.313e3682.js"
+    "static/css/main.41093aca.css",
+    "static/js/main.ed75b192.js"
   ]
 }
