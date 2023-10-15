@@ -2,7 +2,7 @@ import { Button, Dropdown, MenuProps, Rate, Row, Skeleton, Space, Spin } from "a
 import { useEffect, useRef, useState } from "react";
 import { useChatRoom } from "../../hooks/chatRoom";
 import { NotYourMessage } from "./NotYourMessage";
-import { Avatar, Container, CreateButton, CreateMessageContainer, HeaderContainer, JobInfoContainer, MessagesContainer, UserInfo, UserName, LeavePage, ConfirmContainer, ImagePreviewContainer, RemoveImage, ImageContainer, DoneButton, Back, ConfirmButton, FileInputContainer, MessageTextInput, MessageInputValue, CreateReviewContainer, InputHeader, InputBlock } from "./styles";
+import { Avatar, Container, CreateButton, CreateMessageContainer, HeaderContainer, JobInfoContainer, MessagesContainer, UserInfo, UserName, LeavePage, ConfirmContainer, ImagePreviewContainer, RemoveImage, ImageContainer, DoneButton, Back, ConfirmButton, FileInputContainer, MessageTextInput, MessageInputValue, CreateReviewContainer, InputHeader, InputBlock, JobInfoText } from "./styles";
 import { YourMessage } from "./YourMessage";
 import {ArrowLeftOutlined,CloseCircleOutlined,CheckOutlined,UploadOutlined,MoreOutlined} from "@ant-design/icons";
 import { useDoneJob } from "../../hooks/doneJob.hook";
@@ -94,7 +94,7 @@ export const ChatRoom = () => {
         <JobInfoContainer>
             {!chatRoomLoading ? 
             <>
-                {chatRoom?.job.title}
+                <JobInfoText>{chatRoom?.job.title}</JobInfoText>
                 {chatRoom?.jobCreator.id === userId && chatRoom?.job.status !== 'done' 
                     && <Button type="primary" onClick={onDoneJob}>
                             <CheckOutlined />

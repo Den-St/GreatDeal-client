@@ -18,7 +18,7 @@ export const App = () => {
   const user = useAppSelector(state => state.user);
   console.log(user)
   useEffect(() => {
-    
+    document.title = 'GreatDeal'
     // getUsers().then((data) => console.log(data));
     // getJobs().then(a => console.log(a));
     // getCategoriesByName('leaf').then(s => console.log("999",s));

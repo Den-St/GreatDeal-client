@@ -6,7 +6,6 @@ import { Navigate } from "react-router-dom";
 import { RegistrationInterface } from "../../types/registration.type";
 import { useRegistration } from "../../hooks/registration.hook";
 import {GoogleOutlined} from '@ant-design/icons';
-import { signOut } from "firebase/auth";
 import { googleAuthProvider } from "../../firebase/firebaseInit";
 import { useEffect } from "react";
 
@@ -28,7 +27,6 @@ export const RegistrationComponent = () => {
   return <Container>
     {contextHolder}
     <Top onSubmit={handleSubmit(onSubmit)}>
-        <button onClick={() => signOut(googleAuthProvider)}>dfsdf</button>
         <LogoSvg width="70" height="70" color={'#000000'}/>
         <Name>Great Deal</Name>
         <Input {...register('email',{required:true, pattern:emailPattern})}

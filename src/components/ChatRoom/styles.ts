@@ -142,12 +142,22 @@ export const JobInfoContainer = styled.div`
     color:white;
 `;
 
+export const JobInfoText = styled.p`
+    margin:0;
+    width:90%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    overflow-wrap: break-word;
+`;
+
 export const UserInfo = styled(Link)`
     display:flex;
     align-items:center;
     gap:5px;
     text-decoration:none;
     color:white;
+    width:90%;
 `;
 
 export const Avatar = styled.img`
