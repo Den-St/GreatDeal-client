@@ -21,6 +21,10 @@ export const Container = styled.div`
         background:transparent !important;
         color:white !important;
     }
+    .leaflet-touch .leaflet-bar a{
+        background:transparent !important;
+        color:white !important;
+    }
     .leaflet-fade-anim .leaflet-popup {
         transition: none;
     }

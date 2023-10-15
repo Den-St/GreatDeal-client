@@ -4,3 +4,16 @@
     padding:0;
     border-radius:10px;
 }
+
+::-webkit-scrollbar {
+	width: 5px;
+	height: 5px;
+	background-color:#202024;
+}
+::-webkit-scrollbar-corner{
+    background-color: #202024;
+}
+::-webkit-scrollbar-thumb{
+	background-color: rgba(104, 103, 103, 0.723);
+	border-radius: 10px;
+}

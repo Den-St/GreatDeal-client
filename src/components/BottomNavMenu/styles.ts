@@ -20,5 +20,12 @@ export const NavLink = styled(Link)<{$active:boolean}>`
     padding:6px;
     display: flex;
     justify-content: center;
-
+    flex-direction:column;
+    align-items:center;
 `;
+
+export const UserBalance = styled.span`
+    color:white;
+    font-size:15px;
+    position:absolute;
+`;      
