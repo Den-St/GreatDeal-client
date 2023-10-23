@@ -29,7 +29,7 @@ export const UserReport = () => {
     const {loading,report,messages,onChangeReportStatus} = useUserReport();
     const {reportResults,reportResultsLoading,onCreateReportResult,setComment,comment,sentence,setSentence,innocence,setInnocence} = useReportResults();
     if(loading.report) return <Display width="500px" height="500px" align="center" justify="center"><Spin/></Display>
-
+    console.log(reportResults);
     return <Container>
         <Display gap="5px" color={'white'} direction="column">
         <Display padding="10px 5px" background="#1b1f28ae" direction="column" gap="7px" width="735px">
@@ -76,11 +76,12 @@ export const UserReport = () => {
         {report?.status !== reportStatuses.done && <Display width="240px" background="#1b1f28ae" direction="column" padding="5px" position="fixed" right="140px" top={'15px'} gap={'5px'}>
             {report?.status !== 'under investigation' 
                 && <Button type="primary" onClick={() => onChangeReportStatus('under investigation')}>Start investigation</Button> }
-            {report?.status !== reportStatuses.notUnder && <><Radio.Group defaultValue={'innocent'} value={innocence} onChange={(e) => setInnocence(e.target.value)}>
+            {report?.status !== reportStatuses.notUnder && 
+            <><Radio.Group defaultValue={'innocent'} value={innocence} onChange={(e) => setInnocence(e.target.value)}>
                 <Radio value={'innocent'}>Innocent</Radio>
                 <Radio value={'guilty'}>Guilty</Radio>
             </Radio.Group>
-            <TextArea value={comment} onChange={(e) => setComment(e.target.value)}/>
+            {/* <TextArea value={comment} onChange={(e) => setComment(e.target.value)}/> */}
             {innocence === 'guilty' && <Display gap={'5px'}>
                 <Text>Sentence:</Text>
                 <Radio.Group value={sentence} onChange={(e) => setSentence(e.target.value)} defaultValue={'warning'}>
@@ -97,15 +98,17 @@ export const UserReport = () => {
                 });
                 if(report) report.status = 'done';
             }}>Done</Button></>}
-            <Display>
+            <Display direction="column" gap={'5px'}>
                 {!reportResultsLoading && reportResults.map(reportResult => 
-                    <Display direction="column" padding="5px">
+                    <Display direction="column" padding="5px" gap={'5px'}>
                         <Tag icon={reportResult.sentence === 'warning' ? <WarningOutlined /> : <MinusCircleOutlined />}
                              color={reportResult.sentence === 'warning' ? 'warning' : 'error'}>{reportResult.sentence}</Tag>
-                        <Display align="center" gap='5px'>
+                        <Display direction="column">
                             Suspect: 
-                            <Avatar src={reportResult?.suspect?.photoURL || defaultAvatar}/>
-                            <UserName to={'/user/' + reportResult?.suspect.id}>{'user ' + report?.suspect.id}</UserName>
+                            <Display style={{'flexWrap':'wrap',width:'100%'}}>
+                                <Avatar src={reportResult?.suspect?.photoURL || defaultAvatar}/>
+                                <UserName to={'/user/' + reportResult?.suspect.id}>{'user' + report?.suspect.id}</UserName>
+                            </Display>
                         </Display>
                         <Text>Comment: {reportResult.comment}</Text>
                     </Display>

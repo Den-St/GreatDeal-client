@@ -17,3 +17,6 @@
 	background-color: rgba(104, 103, 103, 0.723);
 	border-radius: 10px;
 }
+.ant-message {
+    top:50px !important;
+}

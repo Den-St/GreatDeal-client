@@ -7,7 +7,7 @@ export const banUser = async (userId:string) => {
         const userRef = doc(db,collectionsKeys.users,userId);
         await updateDoc(userRef,
             {
-                banned:true
+                isBanned:true
             });
     }catch(err){
         console.error(err);

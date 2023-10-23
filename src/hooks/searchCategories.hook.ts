@@ -14,7 +14,7 @@ export const useSearchCategories = () => {
         }
         setLoading(true);
         try{
-            const res = await getCategoriesByName(value);
+            const res = await getCategoriesByName(value.toLowerCase());
             setCategories(res as CategoryT[]);
         }catch(err){
             console.error(err);

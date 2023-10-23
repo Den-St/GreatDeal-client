@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
 export const Container = styled.form`
-    width: 100%;
+    
+    .createJobForm{
+        width: 100%;
     display:flex;
     flex-direction:column;
     box-sizing:border-box;
@@ -10,6 +12,7 @@ export const Container = styled.form`
     overflow:scroll;
     background:rgb(31,32,36);
     color:white;
+    }
     .ant-carousel{
         display:unset;
     }
@@ -108,23 +111,36 @@ export const CategoryContainer = styled.div`
     gap:6px;
 `;
 
-export const PhotosInputContainer = styled.div`
+export const PhotosInputContainer = styled.div<{$disabled:boolean}>`
     postion:relative;
     width:60px;
+    height:33px;
     .anticon{
         position:absolute;
         padding:5px;
         font-size:20px;
         width:50px;
-        background:#1677ff;
+        ${({$disabled}) => $disabled ? `background:#989898;` : `background:#1677ff;`}
         color:white;
         border-radius:5px;
+    }
+    p{
+        position:absolute;
+        margin:0;
+        padding:5px;
+        font-size:20px;
+        width:50px;
+        ${({$disabled}) => $disabled ? `background:#989898;` : `background:#1677ff;`}
+        color:white;
+        border-radius:5px;
+        text-align:center;
     }
 `;
 
 export const PhotosInput = styled.input`
     opacity:0;
     width:60px;
+    height:33px;
 `;
 
 export const DescriptionTextarea = styled.textarea`

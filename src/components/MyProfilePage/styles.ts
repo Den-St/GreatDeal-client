@@ -11,13 +11,16 @@ export const Container = styled.div`
     }
     background:rgb(32,32,36);
     color:white;
-    :where(.css-dev-only-do-not-override-1m62vyb).ant-statistic .ant-statistic-title{
+    .ant-statistic .ant-statistic-title{
         color:white;
     }
-    :where(.css-dev-only-do-not-override-1m62vyb).ant-statistic .ant-statistic-content{
+    .ant-statistic .ant-statistic-content{
         color:white;
     }
-    :where(.css-dev-only-do-not-override-1m62vyb).ant-tabs{
+    .ant-tabs{
+        color:white;
+    }
+    .ant-tabs-tab-btn{
         color:white;
     }
 `;

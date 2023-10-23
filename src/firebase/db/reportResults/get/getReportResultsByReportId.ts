@@ -1,3 +1,4 @@
+import { getUserById } from './../../users/get/getUserById';
 import { getDoc } from 'firebase/firestore';
 import { collectionsKeys } from './../../collectionsKeys';
 import { db } from './../../../firebaseInit';
@@ -14,8 +15,12 @@ export const getReportResultsByReportId = async (reportId:string) => {
         const q = query(reportResultsCollection,where('suspect',"==",report?.suspect));
         const docs = (await getDocs(q)).docs;
         const reportResults = docs.map(doc => doc.data());
+        const suspectsQ = reportResults.map(async reportResult => await getUserById(reportResult.suspect));
+        const suspects = await Promise.all(suspectsQ);
+
         reportResults.forEach((reportResult,i) => {
-            reportResult.id = docs[i].id
+            reportResult.id = docs[i].id;
+            reportResult.suspect = suspects[i];
         });
 
         return reportResults as ReportResulT[];

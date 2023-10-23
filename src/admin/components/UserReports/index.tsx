@@ -63,6 +63,7 @@ export const UserReports = () => {
         <Display width="180px">
             {!categoriesLoading ? 
                 <Select 
+                placeholder={'Category'}
                 style={{'width':'100%'}} 
                 mode='multiple'
                 onChange={setPickedCategory} 
@@ -103,7 +104,7 @@ export const UserReports = () => {
                                     <UserName to={'/user/' + report.suspect.id}>{'user ' + report.suspect.id}</UserName>
                                 </Display>
                             </Display>
-                            <Display padding="5px" gap={'5px'}>
+                            <Display padding="5px" gap={'5px'} align={'center'} height={'30px'}>
                                 Category: 
                                 <Text style={{'margin':0,'lineHeight':1}}>{report.category.name}</Text>
                             </Display>

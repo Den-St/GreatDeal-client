@@ -9,7 +9,8 @@ export interface UserI {
     finishedJobs?:number | null;
     id?:string | null;
     lastLocation?:LocationT | null
-    balance?:number | null
+    balance?:number | null,
+    isBanned?:boolean | null
 }
 
 export interface createUserI {

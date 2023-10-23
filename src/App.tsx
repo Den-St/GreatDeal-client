@@ -13,6 +13,7 @@ import "./styles.css";
 import { AdminRoutesSwitch } from "./admin/routes"
 import { useLocation, useParams } from "react-router-dom"
 import { AdminPanelLayout } from "./admin/components/Layout"
+import { BanProvider } from "./providers/banProvider"
 export const App = () => {
   // onAuthStateChanged(googleAuthProvider,() => console.log('authed user',googleAuthProvider.currentUser))
   const user = useAppSelector(state => state.user);
@@ -30,7 +31,9 @@ export const App = () => {
       <Normalize/>
       {!path.includes('admin') ? <Layout>
         <AuthProvider>
-          <RoutesSwitch/>
+          <BanProvider>
+            <RoutesSwitch/>
+          </BanProvider>
         </AuthProvider>
       </Layout>
       : <AdminPanelLayout>

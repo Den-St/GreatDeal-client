@@ -82,7 +82,7 @@ export const MyProfilePage = () => {
                 </Popconfirm>
               </>
             : <>
-              <PhotosInputContainer>
+              <PhotosInputContainer $disabled={false}>
                 <UploadOutlined/>
                 <PhotosInput type={'file'} onChange={onImageChange}/>
               </PhotosInputContainer>

@@ -23,6 +23,7 @@ const userSlice = createSlice({
             state.id = payload?.payload.id;
             state.lastLocation = payload.payload.lastLocation;
             state.balance = payload.payload.balance;
+            state.isBanned = payload.payload.isBanned;
         }
     }
 });

@@ -1,6 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { BottomNavMenu } from "../../components/BottomNavMenu";
 import { routes ,navRoutes} from "../../consts/routes";
+import { useAppSelector } from "../../hooks/redux";
 import { Container, Main, Bottom } from "./styles"
 
 type Props = {
@@ -10,12 +11,13 @@ type Props = {
 export const Layout:React.FC<Props> = ({children}) => {
     const excludedRoutes =  [routes.registration, routes.login, navRoutes.createJob.route, '/chat', '/userReport', '/job/'];
     const route = useLocation().pathname;
+    const isBanned = useAppSelector(user => user.user.isBanned);
 
     return <Container>
         <Main>
             {children}
         </Main>
-        {!excludedRoutes.some(exRoute => route.includes(exRoute)) && <Bottom>
+        {isBanned === false && !excludedRoutes.some(exRoute => route.includes(exRoute)) && <Bottom>
             <BottomNavMenu/>
         </Bottom>}
     </Container>

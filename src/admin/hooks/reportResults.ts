@@ -12,8 +12,8 @@ export const useReportResults = () => {
     const [reportResults,setReportResults] = useState<ReportResulT[]>([]);
     const [reportResultsLoading,setReportResultsLoading] = useState(false);
     const [comment,setComment] = useState('');
-    const [sentence,setSentence] = useState('innocent');
-    const [innocence,setInnocence] = useState('innocent');
+    const [sentence,setSentence] = useState<'ban' | 'innocent' | 'warning'>('innocent');
+    const [innocence,setInnocence] = useState<'innocent' | 'guilty'>('innocent');
 
     const fetch = async () => {
         if(!reportId) return;
@@ -25,7 +25,7 @@ export const useReportResults = () => {
     }
 
     const onCreateReportResult = async (data:CreateReportResultT) => {
-        if(!reportId) return;
+        if(!reportId || (sentence === 'innocent' && innocence === 'guilty')) return;
         await createReportResult(data);
         await changeReportStatus(reportId,'done');
         if(data.sentence === 'ban') await banUser(data.suspect);
