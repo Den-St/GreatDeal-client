@@ -23,10 +23,11 @@ type Props = {
     chosenCategory:CategoryT | null,
     onChangeCategory:(categoryStringifies:string) => void;
     success:boolean;
-    pickedLocation:LatLng | null
+    pickedLocation:LatLng | null,
+    errorMessageComponent:React.ReactNode
 }
 
-export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,searchCategories,categoriesLoading,categories,chosenCategory,onChangeCategory}) => {
+export const CreateJobForm:React.FC<Props> = ({errorMessageComponent,pickedLocation,success,onSubmit,searchCategories,categoriesLoading,categories,chosenCategory,onChangeCategory}) => {
     const {
         register,
         handleSubmit,
@@ -35,34 +36,7 @@ export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,s
         formState:{errors},
         
     } = useForm<CreateJobFormT>();
-    type typeOfErrors = keyof FieldErrors<CreateJobFormT>;
     const maxPhotos = 5;
-    const fieldsKeys = ['title','description','reward','category'];
-    const [messageApi, contextHolder] = message.useMessage();
-    const showError = (message:string,key:string) => {
-      messageApi.open({
-        type: 'error',
-        content: message,
-        key,
-        duration:120
-      });
-    }
-    const clearError = (key:string) => {
-      messageApi.destroy(key);
-    }
-
-    useEffect(() => {
-        Object.keys(watch()).forEach((errorKey:string) => {
-            clearError(errorKey);
-            let errorMessage = errors[errorKey as typeOfErrors]?.message;
-            if(errorMessage){
-                showError(errorMessage,errorKey);
-            }
-            if(!watch('images')?.length){
-                showError('Images is required','images');
-            }
-        });
-    },[errors]);
    
     const onChangeImages = (e:React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return;
@@ -81,10 +55,10 @@ export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,s
         iconUrl:'https://img.icons8.com/?size=512&id=13800&format=png',
         iconSize:[30,30]
     });
-    console.log('f',errors);
+
     if(success) return <Navigate to={'/'}/>
     return <Container onSubmit={handleSubmit(onSubmit)}>
-        {contextHolder}
+        {errorMessageComponent}
         <MapContainer center={new LatLng(pickedLocation?.lat || 0, pickedLocation?.lng || 0)} zoom={15} scrollWheelZoom={false}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

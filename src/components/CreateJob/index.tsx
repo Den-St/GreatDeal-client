@@ -8,7 +8,7 @@ import { useSearchCategories } from "../../hooks/searchCategories.hook";
 import { Spin } from "antd";
 
 export const CreateJob = () => {
-    const {pickedLocation,setLocation,step,userLocationLoading,success,
+    const {pickedLocation,setLocation,step,userLocationLoading,success,errorMessageComponent,
           setUserLocationLoading,nextStep,prevStep,onSubmit,category,onChangeCategory} = useCreateJob();
     const {debounceSearchCategories,categories,categoriesLoading} = useSearchCategories();
 
@@ -19,7 +19,8 @@ export const CreateJob = () => {
             title:"Choose location"
         },
         {
-            component:<CreateJobForm searchCategories={debounceSearchCategories} categories={categories}
+            component:<CreateJobForm errorMessageComponent={errorMessageComponent} 
+             searchCategories={debounceSearchCategories} categories={categories}
              onSubmit={onSubmit} categoriesLoading={categoriesLoading} chosenCategory={category}
              onChangeCategory={onChangeCategory} success={success} pickedLocation={pickedLocation}/>,
             title:"Fill the form"

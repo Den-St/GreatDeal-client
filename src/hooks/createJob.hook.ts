@@ -1,3 +1,4 @@
+import { message } from "antd";
 import { ref, uploadBytes } from "firebase/storage";
 import { LatLng } from "leaflet";
 import { useState } from "react";
@@ -15,6 +16,7 @@ export const useCreateJob = () => {
     const [userLocationLoading,setUserLocationLoading] = useState(true);
     const [category,setCategory] = useState<CategoryT | null>(null);
     const [success,setSuccess] = useState(false);
+    const [messageApi, contextHolder] = message.useMessage();
 
     const onChangeCategory = (categoryStringified:string) => {
         setCategory(JSON.parse(categoryStringified) as CategoryT);
@@ -36,7 +38,27 @@ export const useCreateJob = () => {
     const creator = useAppSelector(state => state.user);
     const onSubmit = async (data:CreateJobFormT) => {
         try{
-            if(!pickedLocation || !category) return;
+            if(!category){
+                  messageApi.open({
+                    type: 'error',
+                    content: 'Category is required',
+                    key:'category',
+                    duration:5
+                  });
+                  return;
+            }
+            if(!data.images?.length){
+                messageApi.open({
+                    type: 'error',
+                    content: 'Images is required',
+                    key:'images',
+                    duration:5
+                  });
+                  return;
+            }
+            messageApi.destroy('category');
+            messageApi.destroy('images');
+            if(!pickedLocation) return;
             const images = await uploadImages(data.images);
             await createJob({...data,location:{_lat:pickedLocation.lat,_long:pickedLocation.lng},creator,category,images:images?.map(image => image.metadata.fullPath) || []});
             setSuccess(true);
@@ -44,5 +66,5 @@ export const useCreateJob = () => {
             console.error(err);
         }
     }
-    return {success,onChangeCategory,pickedLocation,category,setLocation,step,userLocationLoading,setUserLocationLoading,nextStep,prevStep,onSubmit,creator};
+    return {success,onChangeCategory,pickedLocation,category,setLocation,step,userLocationLoading,setUserLocationLoading,nextStep,prevStep,onSubmit,creator,errorMessageComponent:contextHolder};
 }

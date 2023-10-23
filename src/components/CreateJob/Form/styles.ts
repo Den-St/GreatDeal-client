@@ -18,6 +18,7 @@ export const Container = styled.form`
     }
     .leaflet-container{
         height:15vh;
+        margin-bottom:10px;
     }
     .leaflet-bottom {
         display:none;

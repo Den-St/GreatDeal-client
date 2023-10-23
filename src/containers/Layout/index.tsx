@@ -17,7 +17,7 @@ export const Layout:React.FC<Props> = ({children}) => {
         <Main>
             {children}
         </Main>
-        {isBanned === false && !excludedRoutes.some(exRoute => route.includes(exRoute)) && <Bottom>
+        {isBanned !== true && !excludedRoutes.some(exRoute => route.includes(exRoute)) && <Bottom>
             <BottomNavMenu/>
         </Bottom>}
     </Container>
