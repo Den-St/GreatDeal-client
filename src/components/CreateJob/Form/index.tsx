@@ -1,19 +1,15 @@
 import {CloseCircleOutlined,UploadOutlined} from "@ant-design/icons";
-import { FieldErrors, useForm } from "react-hook-form"
-import { CreateJobFormT, CreateJobT } from "../../../types/job.type"
-import { CategoryContainer, CategoryIcon, Container, CreateButton, DescriptionTextarea, ImageContainer, InputBlock, InputHeader, PhotosInput, PhotosInputContainer, RemovePhotoButton } from "./styles"
+import { CreateJobFormT,  } from "../../../types/job.type"
+import { CategoryContainer, CategoryIcon, Container,  ImageContainer,  PhotosInput, PhotosInputContainer, RemovePhotoButton } from "./styles"
 import { DebouncedFunc } from "lodash";
 import { CategoryT } from "../../../types/category.type";
-import { Alert, Carousel, Select, Space ,Image, Button, message} from "antd";
+import { Carousel, Select ,Image, Button, Form, Input} from "antd";
 import { Navigate } from "react-router-dom";
 import {  Marker, TileLayer } from "react-leaflet";
 import { MapContainer } from "react-leaflet";
 import { Icon, LatLng } from "leaflet";
-import { Display } from "../../../assets/Display";
-import { useEffect, useState } from "react";
+import Title from "antd/es/typography/Title";
 const {Option} = Select;
-
-// import 'leaflet/dist/leaflet.css';
 
 type Props = {
     onSubmit:(data:CreateJobFormT) => void;
@@ -24,32 +20,24 @@ type Props = {
     onChangeCategory:(categoryStringifies:string) => void;
     success:boolean;
     pickedLocation:LatLng | null,
-    errorMessageComponent:React.ReactNode
 }
 
-export const CreateJobForm:React.FC<Props> = ({errorMessageComponent,pickedLocation,success,onSubmit,searchCategories,categoriesLoading,categories,chosenCategory,onChangeCategory}) => {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        setValue,
-        formState:{errors},
-        
-    } = useForm<CreateJobFormT>();
+export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,searchCategories,categoriesLoading,categories,chosenCategory,onChangeCategory}) => {
+    const [form] = Form.useForm<CreateJobFormT>();
+    const images = Form.useWatch('images', form);
     const maxPhotos = 5;
    
     const onChangeImages = (e:React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return;
-        const oldImages = watch('images');
+        const oldImages = images;
         if (oldImages?.length === maxPhotos) return;
 
         const newPhotos = Object.keys(e.target.files).slice(0,maxPhotos - (oldImages?.length || 0)).map(fileIndex => e?.target?.files?.[+fileIndex]);
-        //@ts-ignore
-        setValue('images',oldImages?.length ? [...oldImages,...newPhotos] : newPhotos);
+        form.setFieldValue('images',oldImages?.length ? [...oldImages,...newPhotos] : newPhotos);
     }
 
     const removeImage = (image:File) => {
-        setValue('images',watch('images')?.filter(file => file !== image) || []);
+        form.setFieldValue('images',images?.filter((file:File) => file !== image) || []);
     }
     const icon = new Icon({
         iconUrl:'https://img.icons8.com/?size=512&id=13800&format=png',
@@ -57,8 +45,7 @@ export const CreateJobForm:React.FC<Props> = ({errorMessageComponent,pickedLocat
     });
 
     if(success) return <Navigate to={'/'}/>
-    return <Container onSubmit={handleSubmit(onSubmit)}>
-        {errorMessageComponent}
+    return <Container >
         <MapContainer center={new LatLng(pickedLocation?.lat || 0, pickedLocation?.lng || 0)} zoom={15} scrollWheelZoom={false}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -66,56 +53,74 @@ export const CreateJobForm:React.FC<Props> = ({errorMessageComponent,pickedLocat
             />
             <Marker icon={icon} position={new LatLng(pickedLocation?.lat || 0,pickedLocation?.lng || 0)}/>
         </MapContainer>
-        {!!watch("images")?.length && <Carousel >
-            {watch("images").map(image => <ImageContainer key={image.lastModified}>
+        {!!images?.length && <Carousel >
+            {images?.map((image:File) => <ImageContainer key={image.lastModified}>
                 <Image src={URL.createObjectURL(image)} preview={{src:URL.createObjectURL(image)}}/>
                 <RemovePhotoButton onClick={() => removeImage(image)}><CloseCircleOutlined/></RemovePhotoButton>
                 </ImageContainer>)}
         </Carousel>}
-        <Display direction="column" padding="0 0 0 40px" gap={'10px'}>
-            <Space size={'large'}>
-                <InputHeader>Choose photos:</InputHeader>
-                <PhotosInputContainer $disabled={watch('images')?.length === maxPhotos}>
-                    {watch('images')?.length ? <p>+</p> : <UploadOutlined/>}
-                    <PhotosInput disabled={watch('images')?.length === maxPhotos} type={'file'} onChange={onChangeImages} multiple={true} max={5}/>
-                </PhotosInputContainer> 
-            </Space>
-            <Space direction="vertical">
-                <InputHeader>Short title:</InputHeader>
-                <input {...register('title',{required:{message:'Title is required',value:true},})}/>
-            </Space>
-
-            <Space direction="vertical">
-                <InputHeader>Description:</InputHeader>
-                <DescriptionTextarea {...register('description',{
-                    required:{message:'Description is required',value:true},
-                    maxLength:{message:'Description is too long',value:50,},
-                    minLength:{message:'Description is too short',value:10,}})}/>
-            </Space>
-            <Space>
-                <InputHeader>Reward:</InputHeader>
-                <input type="number" {...register('reward',{required:{message:'Reward is required', value:true}})}/>
-            </Space>
-            <InputHeader>Category:</InputHeader>
-            <Select
-                className="select"
-                loading={categoriesLoading}
-                onSearch={searchCategories}
-                showSearch
-                style={{'width':'80%'}}
-                value={chosenCategory ? JSON.stringify(chosenCategory) : ''}
-                onChange={onChangeCategory}
-                >
-                {categories && categories.map(category => 
-                    <Option key={category.id} value={JSON.stringify(category)}>
-                        <CategoryContainer>
-                            <CategoryIcon src={category.iconUrl.replace('FFFFFF',"000000")}/>
-                            {category.name}
-                        </CategoryContainer>
-                    </Option>
-                )}
-            </Select>
-            <CreateButton type={'submit'} value={'Create'}/>
-        </Display>
+        <Form layout="vertical" onFinish={onSubmit} form={form} style={{width:'80%'}}>
+            <Title level={5}>{!images?.length ? `Pick images` : `Add images`}</Title>
+            <PhotosInputContainer $disabled={images?.length === maxPhotos}>
+                {images?.length ? <p>+</p> : <UploadOutlined/>}
+                <PhotosInput disabled={images?.length === maxPhotos} type={'file'} onChange={onChangeImages} multiple={true} max={5}/>
+            </PhotosInputContainer> 
+            <Form.Item 
+                style={{display:'none'}}
+                name={'images'}
+                rules={[{ required: true, message: 'Please choose images!' }]}
+            >
+            </Form.Item>
+            <Form.Item
+                label="Category"
+                name="category"
+                rules={[{ required: true, message: 'Please choose category!' }]}
+            >
+                    <Select
+                        className="select"
+                        loading={categoriesLoading}
+                        onSearch={searchCategories}
+                        showSearch
+                        style={{'width':'80%'}}
+                        value={chosenCategory ? JSON.stringify(chosenCategory) : ''}
+                        onChange={onChangeCategory}
+                        >
+                        {categories && categories.map(category => 
+                            <Option key={category.id} value={JSON.stringify(category)}>
+                                <CategoryContainer>
+                                    <CategoryIcon src={category.iconUrl.replace('FFFFFF',"000000")}/>
+                                    {category.name}
+                                </CategoryContainer>
+                            </Option>
+                        )}
+                    </Select>
+            </Form.Item>
+            <Form.Item
+                label="Title"
+                name="title"
+                rules={[{ required: true, message: 'Please input title!' }]}
+            >
+                <Input />
+            </Form.Item>
+            <Form.Item
+                label="Description"
+                name="description"
+                rules={[{ required: true, message: 'Please input description!' }]}
+            >
+                <Input.TextArea autoSize={true} />
+            </Form.Item>
+            <Form.Item
+                label="Reward"
+                name="reward"
+                rules={[{ required: true, message: 'Please input reward!'}]}
+            >
+                <Input type={'number'} />
+            </Form.Item>
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                <Button type="primary" htmlType="submit">
+                    Submit
+                </Button>
+            </Form.Item>
+        </Form>
     </Container>
 }

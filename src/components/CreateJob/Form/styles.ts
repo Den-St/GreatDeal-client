@@ -1,17 +1,19 @@
 import styled from "styled-components";
 
-export const Container = styled.form`
-    
-    .createJobForm{
-        width: 100%;
-    display:flex;
-    flex-direction:column;
-    box-sizing:border-box;
-    padding-top:20px;
-    gap:5px;
+export const Container = styled.div`
     overflow:scroll;
-    background:rgb(31,32,36);
-    color:white;
+    .ant-form {
+        margin:0 40px !important;
+    }
+    .ant-typography{
+        margin:0 0 10px 0;
+        color:white;
+    }
+    label{
+        color:white !important;
+    }
+    #reward{
+        width:50%;
     }
     .ant-carousel{
         display:unset;
@@ -113,9 +115,10 @@ export const CategoryContainer = styled.div`
 `;
 
 export const PhotosInputContainer = styled.div<{$disabled:boolean}>`
-    postion:relative;
+    position:relative;
     width:60px;
     height:33px;
+    margin-bottom:20px;
     .anticon{
         position:absolute;
         padding:5px;

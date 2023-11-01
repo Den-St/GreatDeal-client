@@ -16,7 +16,6 @@ export const useCreateJob = () => {
     const [userLocationLoading,setUserLocationLoading] = useState(true);
     const [category,setCategory] = useState<CategoryT | null>(null);
     const [success,setSuccess] = useState(false);
-    const [messageApi, contextHolder] = message.useMessage();
 
     const onChangeCategory = (categoryStringified:string) => {
         setCategory(JSON.parse(categoryStringified) as CategoryT);
@@ -37,27 +36,9 @@ export const useCreateJob = () => {
     }
     const creator = useAppSelector(state => state.user);
     const onSubmit = async (data:CreateJobFormT) => {
+        console.log(data,category)
         try{
-            if(!category){
-                  messageApi.open({
-                    type: 'error',
-                    content: 'Category is required',
-                    key:'category',
-                    duration:5
-                  });
-                  return;
-            }
-            if(!data.images?.length){
-                messageApi.open({
-                    type: 'error',
-                    content: 'Images is required',
-                    key:'images',
-                    duration:5
-                  });
-                  return;
-            }
-            messageApi.destroy('category');
-            messageApi.destroy('images');
+            if(!category || !data.images?.length) return;
             if(!pickedLocation) return;
             const images = await uploadImages(data.images);
             await createJob({...data,location:{_lat:pickedLocation.lat,_long:pickedLocation.lng},creator,category,images:images?.map(image => image.metadata.fullPath) || []});
@@ -66,5 +47,5 @@ export const useCreateJob = () => {
             console.error(err);
         }
     }
-    return {success,onChangeCategory,pickedLocation,category,setLocation,step,userLocationLoading,setUserLocationLoading,nextStep,prevStep,onSubmit,creator,errorMessageComponent:contextHolder};
+    return {success,onChangeCategory,pickedLocation,category,setLocation,step,userLocationLoading,setUserLocationLoading,nextStep,prevStep,onSubmit,creator,};
 }
