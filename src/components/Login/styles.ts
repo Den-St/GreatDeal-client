@@ -1,3 +1,4 @@
+import { Media } from './../../assets/breakpoints';
 import { Link } from 'react-router-dom';
 import styled from "styled-components";
 
@@ -14,6 +15,13 @@ export const Top = styled.form`
     flex-direction: column;
     align-items: center;
     gap:26px;
+    height:77.8vh;
+    ${Media.down.xxl}{
+        height:69.8vh;
+    }
+    ${Media.down.m}{
+        height:67.8vh;
+    }
     input{
         width:250px;
         height:36px;
@@ -80,6 +88,7 @@ export const RegistrationButtonContainer = styled(Link)`
     text-decoration: none;
     height: 40px;
     padding:5px 15px;
+    width: 100%;
     border-radius: 25px;
     display:flex;
     align-items: center;
@@ -95,6 +104,7 @@ export const Registrationp = styled.p`
 export const RegistrationContainer = styled.div`
     display:flex;
     flex-direction:column;
+    width: 45%;
     gap: 5px;
     align-items: center;
 `;

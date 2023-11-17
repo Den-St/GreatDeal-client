@@ -64,7 +64,7 @@ export const JobSearch = () => {
             <CategoryIcon src={job.category?.iconUrl}/>
             <JobTitle to={`/job/${job?.id}`}>{job?.title}</JobTitle>
             <JobReward>{job.reward}</JobReward>
-        </JobItemContainer>) : <Tag style={{'fontSize':"30px","padding":"15px",textAlign:'center'}}>No jobs</Tag> : <Display width='100%' height='100%' justify='center' align='center'><Spin/></Display>}
+        </JobItemContainer>) : <Tag style={{'fontSize':"30px","padding":"15px",textAlign:'center',color:'white'}}>No jobs</Tag> : <Display width='100%' height='100%' justify='center' align='center'><Spin/></Display>}
     </JobsContainer>
   </Container>
 }

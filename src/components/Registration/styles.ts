@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Media } from "../../assets/breakpoints";
 
 export const Container = styled.div`
     display:flex;
@@ -15,6 +16,13 @@ export const Top = styled.form`
     align-items: center;
     gap:26px;
     background-color: white;
+    height:77.8vh;
+    ${Media.down.xxl}{
+        height:69.8vh;
+    }
+     ${Media.down.m}{
+        height:67.8vh;
+    }
     input{
         width:250px;
         height:36px;
@@ -73,7 +81,6 @@ export const NoAccountNotification = styled.label`
 export const RegistrationButton = styled(Link)`
     width: 45%;
     text-decoration: none;
-    
     height: 40px;
     background-color: white;
     border-radius: 25px;

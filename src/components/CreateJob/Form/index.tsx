@@ -53,7 +53,7 @@ export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,s
             />
             <Marker icon={icon} position={new LatLng(pickedLocation?.lat || 0,pickedLocation?.lng || 0)}/>
         </MapContainer>
-        {!!images?.length && <Carousel >
+        {!!images?.length && <Carousel>
             {images?.map((image:File) => <ImageContainer key={image.lastModified}>
                 <Image src={URL.createObjectURL(image)} preview={{src:URL.createObjectURL(image)}}/>
                 <RemovePhotoButton onClick={() => removeImage(image)}><CloseCircleOutlined/></RemovePhotoButton>
@@ -61,7 +61,7 @@ export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,s
         </Carousel>}
         <Form layout="vertical" onFinish={onSubmit} form={form} style={{width:'80%'}}>
             <Title level={5}>{!images?.length ? `Pick images` : `Add images`}</Title>
-            <PhotosInputContainer $disabled={images?.length === maxPhotos}>
+            <PhotosInputContainer style={{marginBottom:'20px'}} $disabled={images?.length === maxPhotos}>
                 {images?.length ? <p>+</p> : <UploadOutlined/>}
                 <PhotosInput disabled={images?.length === maxPhotos} type={'file'} onChange={onChangeImages} multiple={true} max={5}/>
             </PhotosInputContainer> 

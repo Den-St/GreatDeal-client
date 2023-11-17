@@ -21,7 +21,7 @@ export const MyProfilePage = () => {
     const {user,applicantJobRequests,jobs,loading,
            creatorJobRequests,setDir,dir,fetchCreatedJobs,reviews,stats,
            fetchYourJobRequestsByAplicant,fetchYourJobRequestsByCreator} = useMyProfile();
-
+        
     const {onConfirmEditUserInfo,changeNameUserInfo,setIsEditingUserInfo,isEditingUserInfo,setNewImage,newImage,newUserInfo} = useEditUserInfo();
     const [logout,setLogout] = useState(false);
     
@@ -33,7 +33,6 @@ export const MyProfilePage = () => {
 
     const onLogout = () => {
         signOut(googleAuthProvider).then(() => setLogout(true));
-
     }
 
     const directories = [
@@ -103,9 +102,9 @@ export const MyProfilePage = () => {
                 <Col >
                     <Statistic style={{color:'white'}} title="Jobs" value={stats?.numberOfJobs} loading={loading.stats}/>
                 </Col>
-                <Col >
+                {/* <Col >
                     <Statistic style={{color:'white'}} title="Fdsfsd" value={45} loading={loading.stats}/>
-                </Col>
+                </Col> */}
         </Row>
         <Tabs defaultActiveKey="0" items={directories} onChange={(key) => setDir(+key)} />
     </Container>

@@ -15,15 +15,15 @@ export const Container = styled.div`
     #reward{
         width:50%;
     }
-    .ant-carousel{
-        display:unset;
-    }
     .leaflet-container{
         height:15vh;
         margin-bottom:10px;
     }
     .leaflet-bottom {
         display:none;
+    }
+    .ant-carousel{
+        display:unset;
     }
     .ant-image-img{
         width:160px;
@@ -118,7 +118,6 @@ export const PhotosInputContainer = styled.div<{$disabled:boolean}>`
     position:relative;
     width:60px;
     height:33px;
-    margin-bottom:20px;
     .anticon{
         position:absolute;
         padding:5px;
