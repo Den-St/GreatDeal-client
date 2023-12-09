@@ -24,9 +24,13 @@ const userSlice = createSlice({
             state.lastLocation = payload.payload.lastLocation;
             state.balance = payload.payload.balance;
             state.isBanned = payload.payload.isBanned;
+        },
+        addMoney(state,payload:PayloadAction<{money:number}>){
+            state.balance = (state.balance || 0) + payload.payload.money;
         }
     }
 });
 
 export const {setUser} = userSlice.actions;
+export const {addMoney} = userSlice.actions;
 export default userSlice.reducer;

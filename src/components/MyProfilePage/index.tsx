@@ -13,9 +13,10 @@ import { PhotosInput, PhotosInputContainer } from "../CreateJob/Form/styles";
 import { ReviewsDirectory } from "./Directories/ReviewsDirectory";
 import { signOut } from "firebase/auth";
 import { googleAuthProvider } from "../../firebase/firebaseInit";
-import { useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import { Display } from "../../assets/Display";
+import { routes } from "../../consts/routes";
 
 export const MyProfilePage = () => {
     const {user,applicantJobRequests,jobs,loading,
@@ -24,6 +25,9 @@ export const MyProfilePage = () => {
         
     const {onConfirmEditUserInfo,changeNameUserInfo,setIsEditingUserInfo,isEditingUserInfo,setNewImage,newImage,newUserInfo} = useEditUserInfo();
     const [logout,setLogout] = useState(false);
+    useEffect(() => {
+        document.title = 'My Profile - GreatDeal';
+    },[]);
     
     const onImageChange = (e:React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
@@ -79,6 +83,7 @@ export const MyProfilePage = () => {
                     cancelText="No">
                     <Button danger style={{'background':'#202024'}} ><LogoutOutlined /></Button>
                 </Popconfirm>
+                <Link to={routes.deposit}>MONEY</Link>
               </>
             : <>
               <PhotosInputContainer $disabled={false}>

@@ -1,3 +1,4 @@
+import { payReward } from './../firebase/db/users/patch/payReward';
 import { message } from "antd";
 import { ref, uploadBytes } from "firebase/storage";
 import { LatLng } from "leaflet";

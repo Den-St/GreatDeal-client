@@ -8,5 +8,6 @@ export enum collectionsKeys {
     receipts = "receipts",
     reportCategories = "reportCategories",
     reports = "reports",
-    reportResults = "reportResults"
+    reportResults = "reportResults",
+    deposits = "deposits",
 };

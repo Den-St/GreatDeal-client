@@ -1,3 +1,4 @@
+import { getFunctions } from 'firebase/functions';
 import { initializeApp } from "firebase/app";
 import {getAuth,GoogleAuthProvider} from "firebase/auth";
 import {getFirestore} from 'firebase/firestore';
@@ -18,3 +19,4 @@ export const googleAuthProvider = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const storage = getStorage(app);
 export const db = getFirestore(app);
+export const functions = getFunctions(app,'us-central1');

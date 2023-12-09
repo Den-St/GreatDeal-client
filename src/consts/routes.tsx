@@ -7,6 +7,8 @@ import Registration from "../containers/Registration/index";
 import {CommentOutlined,PlusCircleOutlined,SearchOutlined,EnvironmentOutlined,IdcardOutlined} from '@ant-design/icons';
 import { UserProfile } from "../components/UserProfile";
 import { ReportForm } from "../components/ReportForm";
+import { Deposit } from "../components/Deposit";
+import { AfterPayment } from "../components/AfterPayment";
 
 export const navRoutes = {
     home:{
@@ -42,7 +44,9 @@ export const routes = {
     job:`/job/:id`,
     user:`/user/:id`,
     chat:`/chat/:id`,
-    githubPage:'/GreatDeal-client'
+    deposit:`/deposit`,
+    githubPage:'/GreatDeal-client',
+    afterPayment:'/after-payment'
 };
 
 const GitHubPages = () => {
@@ -60,6 +64,8 @@ export const PublicRoutes = [
     <Route key={navRoutes.myChatrooms.route} element={<MyChatRooms/>} path={navRoutes.myChatrooms.route}/>,
     <Route key={routes.chat} element={<ChatRoom/>} path={routes.chat}/>,
     <Route key={routes.user} element={<UserProfile/>} path={routes.user}/>,
+    <Route key={routes.deposit} element={<Deposit/>} path={routes.deposit}/>,
+    <Route key={routes.afterPayment} element={<AfterPayment/>} path={routes.afterPayment}/>,
 
     <Route key={routes.githubPage} element={<GitHubPages/>} path={routes.githubPage}/>,
 ]

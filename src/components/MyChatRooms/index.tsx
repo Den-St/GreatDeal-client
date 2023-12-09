@@ -6,9 +6,14 @@ import { useChatRooms } from "../../hooks/chatRooms";
 import { Avatar } from "../ChatRoom/styles";
 import { ChatRoomContainer, Container, Right, LastMessageName, LastMessageText, UserName, LastMessageContainer } from "./styles";
 import { useAppSelector } from "../../hooks/redux";
+import { useEffect } from "react";
 
 export const MyChatRooms = () => {
     const {chatRooms,chatRoomsLoading,userId} = useChatRooms();
+    useEffect(() => {
+        document.title = 'My Chats - Great Deal';
+    },[]);
+    
     console.log(chatRooms)
     return <Container>
         {!chatRoomsLoading ? chatRooms.sort((a) => a.job.status === 'done' ? 1 : -1).map(chatRoom => 

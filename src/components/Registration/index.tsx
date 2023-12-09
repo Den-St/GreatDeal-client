@@ -18,6 +18,9 @@ export const RegistrationComponent = () => {
     } = useForm<RegistrationInterface>();
   
     useEffect(() => {
+        document.title = 'Registration - GreatDeal';
+    },[]);
+    useEffect(() => {
         if(errors.email?.message) showError(errors.email.message);
         if(errors.password?.message) showError(errors.password.message);
     },[errors.email, errors.password]);

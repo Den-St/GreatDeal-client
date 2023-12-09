@@ -6,12 +6,16 @@ import { CreateJobForm } from "./Form";
 import { useCreateJob } from "../../hooks/createJob.hook";
 import { useSearchCategories } from "../../hooks/searchCategories.hook";
 import { Spin } from "antd";
+import { useEffect } from "react";
 
 export const CreateJob = () => {
     const {pickedLocation,setLocation,step,userLocationLoading,success,
           setUserLocationLoading,nextStep,prevStep,onSubmit,category,onChangeCategory} = useCreateJob();
     const {debounceSearchCategories,categories,categoriesLoading} = useSearchCategories();
-
+    useEffect(() => {
+        document.title = 'Create job - GreatDeal';
+    },[]);
+    
     const steps = [
         {
             component:<LocationPickerMap setUserLocationLoading={setUserLocationLoading}

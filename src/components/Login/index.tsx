@@ -16,6 +16,9 @@ export const LoginComponent = () => {
         formState:{errors}
     } = useForm<RegistrationInterface>();
     useEffect(() => {
+        document.title = 'Login - GreatDeal';
+    },[]);
+    useEffect(() => {
         if(errors.email?.message) showError(errors.email.message);
         if(errors.password?.message) showError(errors.password.message);
     },[errors.email, errors.password]);

@@ -5,9 +5,13 @@ import { defaultAvatar } from "../../consts/defaultAvatar";
 import { Col, Divider, Empty, Row, Skeleton, Space, Spin, Statistic, Tag } from "antd";
 import { Avatar } from "../ChatRoom/styles";
 import { Rate, ReviewCreatorName, ReviewText } from "../MyProfilePage/styles";
+import { useEffect } from "react";
 
 export const UserProfile = () => {
     const {user,loading,stats,reviews} = useUserProfile();
+    useEffect(() => {
+        document.title = user?.displayName || 'User profile'
+    },[]);
     
     return <Container>
         <UserInfoContainer>

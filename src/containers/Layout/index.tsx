@@ -9,7 +9,7 @@ type Props = {
 }
 
 export const Layout:React.FC<Props> = ({children}) => {
-    const excludedRoutes =  [routes.registration, routes.login, navRoutes.createJob.route, '/chat', '/userReport', '/job/'];
+    const excludedRoutes =  [routes.registration, routes.login, navRoutes.createJob.route, '/chat', '/userReport', '/job/',routes.deposit];
     const route = useLocation().pathname;
     const isBanned = useAppSelector(user => user.user.isBanned);
 

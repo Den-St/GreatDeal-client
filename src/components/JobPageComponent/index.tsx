@@ -9,7 +9,7 @@ import { Button, Carousel,Dropdown,Image, MenuProps, Row, Space, Spin, Tag } fro
 import { CategoryIcon } from "../JobSearch/styles";
 import { defaultAvatar } from "../../consts/defaultAvatar";
 import { Display } from "../../assets/Display";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReportForm } from "../ReportForm";
 import {ArrowLeftOutlined,MoreOutlined} from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -24,6 +24,9 @@ export const JobPageComponent = () => {
           key: '0',
         },
     ];
+    useEffect(() => {
+        document.title = job?.title + ' - GreatDeal';
+    },[job?.title]);
     
     if(jobLoading) return <Container>
             <Display justify="center" align="center" width="100%" height="100%">

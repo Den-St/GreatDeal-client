@@ -20,6 +20,7 @@ export const useChatRoom = (clearInputs:() => void) => {
     const [messages,setMessages] = useState<MessageT[]>();
     const [messagesLoading,setMessagesLoading] = useState(true);
     const userId = useAppSelector(state => state.user.id);
+    const balance = useAppSelector(state => state.user.balance);
     
     const fetchChatRoom = async () => {
         if(!chatRoomId) return;
@@ -82,6 +83,7 @@ export const useChatRoom = (clearInputs:() => void) => {
         });
         setMessagesLoading(false);
         return () => unsubscribe();
-    },[chatRoomId])
-    return {chatRoom,chatRoomLoading,messages,messagesLoading,onCreateMessage,userId}
+    },[chatRoomId]);
+    
+    return {chatRoom,chatRoomLoading,messages,messagesLoading,onCreateMessage,userId,balance}
 }

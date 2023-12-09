@@ -28,10 +28,13 @@ export const ChatRoom = () => {
         setValue('text','');
         setValue('images',null);
     }
-    const {messages,messagesLoading,chatRoom,chatRoomLoading,onCreateMessage,userId} = useChatRoom(clearInputs);
+    const {messages,messagesLoading,chatRoom,chatRoomLoading,onCreateMessage,userId,balance} = useChatRoom(clearInputs);
     const {onDoneJob,isOnDoneJob,rate,setRate,confirmDoneJob,leaveDoneJob,isWorkFinished,review,setReview} = useDoneJob();
     const [isOnReport,setIsOnReport] = useState(false);
-    
+    useEffect(() => {
+        document.title = 'Chat ' + userId === chatRoom?.jobCreator.id ? chatRoom?.worker.displayName ? 'with ' + chatRoom?.worker.displayName : '' : chatRoom?.jobCreator.displayName ? 'with ' + chatRoom?.jobCreator.displayName : '';
+    },[]);
+
     const menu: MenuProps['items'] = [
         {
           label: <Button onClick={() => setIsOnReport(true)} danger>Report</Button>,
@@ -60,7 +63,7 @@ export const ChatRoom = () => {
                 <InputHeader>Rate worker:</InputHeader>
                 <Rate  value={rate} onChange={setRate}/>
             </InputBlock>
-            <Button type="primary" onClick={() => confirmDoneJob(chatRoom?.job,chatRoom?.worker)}>Confirm</Button>
+            <Button disabled={(balance || 0) < (chatRoom?.job?.reward || 0)} type="primary" onClick={() => confirmDoneJob(chatRoom?.job,chatRoom?.worker)}>Confirm</Button>
         </CreateReviewContainer>
     </ConfirmContainer>
 
@@ -96,7 +99,7 @@ export const ChatRoom = () => {
             <>
                 <JobInfoText>{chatRoom?.job.title}</JobInfoText>
                 {chatRoom?.jobCreator.id === userId && chatRoom?.job.status !== 'done' 
-                    && <Button type="primary" onClick={onDoneJob}>
+                    && <Button disabled={(balance || 0) < (chatRoom?.job?.reward || 0)} type="primary" onClick={onDoneJob}>
                             <CheckOutlined />
                        </Button>}
             </>

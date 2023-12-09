@@ -15,6 +15,10 @@ export const JobSearch = () => {
         onClearCategory,onChangeTitle,isNearJob,onChangeNearJob,title} = useSearchJobs(setJobs);
   const {debounceSearchCategories,categories,categoriesLoading} = useSearchCategories();
   const closeFilter = () => setFilterOpened(false);
+  
+  useEffect(() => {
+    document.title = 'Job search - GreatDeal';
+  },[]);
 
   return <Container>
     <Display align='center' gap='20px' >

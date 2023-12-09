@@ -9,6 +9,7 @@ import {  Marker, TileLayer } from "react-leaflet";
 import { MapContainer } from "react-leaflet";
 import { Icon, LatLng } from "leaflet";
 import Title from "antd/es/typography/Title";
+import { useAppSelector } from "../../../hooks/redux";
 const {Option} = Select;
 
 type Props = {
@@ -26,7 +27,6 @@ export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,s
     const [form] = Form.useForm<CreateJobFormT>();
     const images = Form.useWatch('images', form);
     const maxPhotos = 5;
-   
     const onChangeImages = (e:React.ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return;
         const oldImages = images;
@@ -108,7 +108,7 @@ export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,s
                 rules={[{ required: true, message: 'Please input description!' }]}
             >
                 <Input.TextArea autoSize={true} />
-            </Form.Item>
+            </Form.Item>    
             <Form.Item
                 label="Reward"
                 name="reward"
@@ -116,7 +116,7 @@ export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,s
             >
                 <Input type={'number'} />
             </Form.Item>
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+            <Form.Item wrapperCol={{ offset: 10, span: 16 }}>
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
