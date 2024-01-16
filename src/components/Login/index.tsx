@@ -7,6 +7,7 @@ import { RegistrationInterface } from "../../types/registration.type";
 import { LoginButtonContainer, Container, Input, Name, Top, Bottom, RegistrationContainer, NoAccountNotification, RegistrationButtonContainer, SocialsContainer, SocialButtonContainer } from "./styles"
 import {GoogleOutlined} from '@ant-design/icons';
 import { useEffect } from "react";
+import { wrappedRoutes } from "../../consts/routes";
 
 export const LoginComponent = () => {
     const {success,contextHolder,onSubmit,signInWithGoogle,showError} = useLogin();
@@ -23,7 +24,7 @@ export const LoginComponent = () => {
         if(errors.password?.message) showError(errors.password.message);
     },[errors.email, errors.password]);
     
-  if(success) return <Navigate to={'/'}/>
+  if(success) return <Navigate to={wrappedRoutes.home}/>
   return <Container>
         {contextHolder}
         <Top onSubmit={handleSubmit(onSubmit)}>
@@ -38,7 +39,7 @@ export const LoginComponent = () => {
         <Bottom>
             <RegistrationContainer>
                 <NoAccountNotification>Don't have an account?</NoAccountNotification>
-                <RegistrationButtonContainer to={'/registration'}>Registration</RegistrationButtonContainer>
+                <RegistrationButtonContainer to={wrappedRoutes.registration}>Registration</RegistrationButtonContainer>
             </RegistrationContainer>
             <SocialsContainer>
                 <NoAccountNotification>You can sign up using this socials:</NoAccountNotification>

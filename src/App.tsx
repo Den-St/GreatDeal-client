@@ -14,6 +14,7 @@ import { AdminRoutesSwitch } from "./admin/routes"
 import { useLocation, useParams } from "react-router-dom"
 import { AdminPanelLayout } from "./admin/components/Layout"
 import { BanProvider } from "./providers/banProvider"
+import { AfterPaymentProvider } from "./providers/afterPaymentProvider"
 export const App = () => {
   // onAuthStateChanged(googleAuthProvider,() => console.log('authed user',googleAuthProvider.currentUser))
   const user = useAppSelector(state => state.user);
@@ -32,7 +33,9 @@ export const App = () => {
       {!path.includes('admin') ? <Layout>
         <AuthProvider>
           <BanProvider>
-            <RoutesSwitch/>
+            <AfterPaymentProvider>
+              <RoutesSwitch/>
+            </AfterPaymentProvider>
           </BanProvider>
         </AuthProvider>
       </Layout>

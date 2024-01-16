@@ -8,6 +8,7 @@ import { JobRequestT } from '../../../types/jobRequest.type'
 import { Avatar } from '../../ChatRoom/styles'
 import { CategoryIcon } from '../../JobSearch/styles'
 import { ItemContainer, ItemsContainer, JobTitle, UserContainer, UserName } from '../styles'
+import { wrappedRoutes } from '../../../consts/routes';
 type Props = {
     creatorJobRequestsLoading:boolean,
     creatorJobRequests:JobRequestT[],
@@ -27,7 +28,7 @@ export const CreatorJobRequests:React.FC<Props> = ({creatorJobRequests,creatorJo
       </UserContainer>
       <Space>
         <CategoryIcon src={req.job.category?.iconUrl}/>
-        <JobTitle to={'/job/'+req.job.id}>{req.job.title}</JobTitle>
+        <JobTitle to={wrappedRoutes.job.replace(":id",req.job.id)}>{req.job.title}</JobTitle>
       </Space>
     </Space>
     {req.status === 'active' ? <Display direction='column' gap={'10px'} padding={'10px 0px'}>

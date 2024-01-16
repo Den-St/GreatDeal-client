@@ -21,7 +21,7 @@ export const Top = styled.form`
         height:69.8vh;
     }
      ${Media.down.m}{
-        height:67.8vh;
+        height:67.8svh;
     }
     input{
         width:250px;

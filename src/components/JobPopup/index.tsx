@@ -1,5 +1,6 @@
 import { Button, Skeleton, Spin, Tag } from "antd";
 import { defaultAvatar } from "../../consts/defaultAvatar";
+import { wrappedRoutes } from "../../consts/routes";
 import { useSendJobRequest } from "../../hooks/jobPopup.hook";
 import { JobT } from "../../types/job.type"
 import { ApplyButton, Avatar, BottomContainer, Container, Creator, CreatorName, Reward, Title } from "./styles";
@@ -14,9 +15,9 @@ export const JobPopup:React.FC<Props> = ({job}) => {
     return <Container>
         <Creator>
             <Avatar src={job.creator?.photoURL || defaultAvatar}/>
-            <CreatorName to={'/user/'+job.creator?.id}>{job.creator?.displayName || `user ` + job.creator?.id}</CreatorName>
+            {!!job.creator?.id && <CreatorName to={wrappedRoutes.user.replace(":id",job.creator?.id)}>{job.creator?.displayName || `user ` + job.creator?.id}</CreatorName>}
         </Creator>
-        <Title to={'/job/'+job.id}>
+        <Title to={wrappedRoutes.job.replace(":id",job.id)}>
             {job.title}
         </Title>
         <BottomContainer>

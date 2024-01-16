@@ -1,5 +1,6 @@
 import { Button, Empty, Skeleton, Space, Spin, Tag } from "antd";
 import { Display } from "../../../assets/Display";
+import { wrappedRoutes } from "../../../consts/routes";
 import { useJobStatusController } from "../../../hooks/jobStatusController.hook"
 import { JobStatusT, JobT } from "../../../types/job.type"
 import { CategoryIcon } from "../../JobSearch/styles";
@@ -20,7 +21,7 @@ export const JobsDirectory:React.FC<Props> = ({jobs,jobsLoading,refetch}) => {
     <Space style={{'background':'#2f3035'}} key={job.id} size={'small'} direction='vertical'>
         <ItemContainer >
             <CategoryIcon src={job.category?.iconUrl}/>
-            <JobTitle to={'/job/' + job.id}>{job.title}fasdfbbbbbb</JobTitle>
+            <JobTitle to={wrappedRoutes.job.replace(":id",job.id)}>{job.title}fasdfbbbbbb</JobTitle>
             <JobReward>{job.reward}</JobReward>
         </ItemContainer>
         <Space>

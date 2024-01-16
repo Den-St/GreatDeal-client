@@ -10,6 +10,9 @@ export const Container = styled.div`
 
 export const ConfirmContainer = styled.div`
     height: 100vh;
+    ${Media.down.m}{
+        height:100svh;
+    }
     font-family:helvetica;
     display:flex;
     flex-direction:column;
@@ -50,6 +53,9 @@ export const CreateMessageContainer = styled.form`
     padding:5px;
     gap:5px;
     min-height:7vh;
+    ${Media.down.m}{
+        min-height:7svh;
+    }
     box-sizing:border-box;
     border-top:1px solid black;
     align-items:center;
@@ -83,6 +89,9 @@ export const MessagesContainer = styled.div`
     padding:5px 15px 5px 5px;
     box-sizing:border-box;
     height:79vh;
+    ${Media.down.m}{
+        height:79svh;
+    }
     overflow-y:scroll;
     background:rgb(32,32,36);
     
@@ -124,6 +133,9 @@ export const NotYourMessageContainer = styled.div`
 export const HeaderContainer = styled.div`
     width:100%;
     height:7vh;
+    ${Media.down.m}{
+        height:7svh;
+    }
     border-bottom:1px solid black;
     box-sizing:border-box;
     display:flex;
@@ -134,6 +146,9 @@ export const HeaderContainer = styled.div`
 export const JobInfoContainer = styled.div`
     display:flex;
     height: 7vh;
+    ${Media.down.m}{
+        height:7svh;
+    }
     padding:5px;
     box-sizing:border-box;
     gap:5px;

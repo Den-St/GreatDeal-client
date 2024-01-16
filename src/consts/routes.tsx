@@ -10,34 +10,6 @@ import { ReportForm } from "../components/ReportForm";
 import { Deposit } from "../components/Deposit";
 import { AfterPayment } from "../components/AfterPayment";
 
-export const navRoutes = {
-    home:{
-        route:'/',
-        label:'map',
-        icon:<EnvironmentOutlined  />
-    },
-    jobSearch:{
-        route:'/job-search',
-        label:'search',
-        icon:<SearchOutlined />
-    },
-    createJob:{
-        route:'/create-job',
-        label:'create',
-        icon:<PlusCircleOutlined />
-    },
-    myChatrooms:{
-        route:'/my-chatrooms',
-        label:'my chatrooms',
-        icon:<CommentOutlined />
-    },
-    myProfile:{
-        route:'/myProfile',
-        label:'My Profile',
-        icon:<IdcardOutlined />
-    },
-
-}
 export const routes = {
     registration:"/registration",
     login:"/login",
@@ -45,29 +17,77 @@ export const routes = {
     user:`/user/:id`,
     chat:`/chat/:id`,
     deposit:`/deposit`,
-    githubPage:'/GreatDeal-client',
-    afterPayment:'/after-payment'
+    afterPayment:'/after-payment',
+    home:'/',
+    jobSearch:'/job-search',
+    createJob:'/create-job',
+    myChatRooms:'/my-chatrooms',
+    myProfile:'/myProfile'
 };
+export type routesKeysType = 'home' | 'registration' | 'login' | 'job' | 'user' | 'chat' | 'deposit' | 'afterPayment' | 'jobSearch' | 'createJob' | 'myChatRooms' | 'myProfile';
 
-const GitHubPages = () => {
-    return <Navigate to={'/'}/>
+export const baseRoute = '/GreatDeal-client'
+
+const routeWrap = (route:string) => baseRoute + route;
+
+export const wrappedRoutes:Record<routesKeysType,string>  = {
+    registration:'',
+    login:'',
+    job:'',
+    user:'',
+    chat:'',
+    deposit:'',
+    afterPayment:'',
+    home:'',
+    jobSearch:'',
+    createJob:'',
+    myChatRooms:'',
+    myProfile:''
+};
+Object.keys(routes).forEach(key => wrappedRoutes[key as routesKeysType] = routeWrap(routes[key as routesKeysType]));
+
+export const navRoutes = {
+    home:{
+        route:wrappedRoutes.home,
+        label:'map',
+        icon:<EnvironmentOutlined  />
+    },
+    jobSearch:{
+        route:wrappedRoutes.jobSearch,
+        label:'search',
+        icon:<SearchOutlined />
+    },
+    createJob:{
+        route:wrappedRoutes.createJob,
+        label:'create',
+        icon:<PlusCircleOutlined />
+    },
+    myChatrooms:{
+        route:wrappedRoutes.myChatRooms,
+        label:'my chatrooms',
+        icon:<CommentOutlined />
+    },
+    myProfile:{
+        route:wrappedRoutes.myProfile,
+        label:'My Profile',
+        icon:<IdcardOutlined />
+    },
 }
+
 
 export const PublicRoutes = [
     <Route key={navRoutes.home.route} element={<Home/>} path={navRoutes.home.route}/>,
-    <Route key={routes.login} element={<Login/>} path={routes.login}/>,
-    <Route key={routes.registration} element={<Registration/>} path={routes.registration}/>,
+    <Route key={wrappedRoutes.login} element={<Login/>} path={wrappedRoutes.login}/>,
+    <Route key={wrappedRoutes.registration} element={<Registration/>} path={wrappedRoutes.registration}/>,
     <Route key={navRoutes.createJob.route} element={<CreateJob/>} path={navRoutes.createJob.route}/>,
     <Route key={navRoutes.jobSearch.route} element={<JobSearch/>} path={navRoutes.jobSearch.route}/>,
-    <Route key={routes.job} element={<JobPage/>} path={routes.job}/>,
+    <Route key={wrappedRoutes.job} element={<JobPage/>} path={wrappedRoutes.job}/>,
     <Route key={navRoutes.myProfile.route} element={<MyProfilePage/>} path={navRoutes.myProfile.route}/>,
     <Route key={navRoutes.myChatrooms.route} element={<MyChatRooms/>} path={navRoutes.myChatrooms.route}/>,
-    <Route key={routes.chat} element={<ChatRoom/>} path={routes.chat}/>,
-    <Route key={routes.user} element={<UserProfile/>} path={routes.user}/>,
-    <Route key={routes.deposit} element={<Deposit/>} path={routes.deposit}/>,
-    <Route key={routes.afterPayment} element={<AfterPayment/>} path={routes.afterPayment}/>,
-
-    <Route key={routes.githubPage} element={<GitHubPages/>} path={routes.githubPage}/>,
+    <Route key={wrappedRoutes.chat} element={<ChatRoom/>} path={wrappedRoutes.chat}/>,
+    <Route key={wrappedRoutes.user} element={<UserProfile/>} path={wrappedRoutes.user}/>,
+    <Route key={wrappedRoutes.deposit} element={<Deposit/>} path={wrappedRoutes.deposit}/>,
+    <Route key={wrappedRoutes.afterPayment} element={<AfterPayment/>} path={wrappedRoutes.afterPayment}/>,
 ]
 
 export const RoutesSwitch = () => {

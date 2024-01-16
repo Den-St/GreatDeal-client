@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import { ReportForm } from "../ReportForm";
 import {ArrowLeftOutlined,MoreOutlined} from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { wrappedRoutes } from "../../consts/routes";
 
 export const JobPageComponent = () => {
     const {job,jobLoading} = useJobPage();
@@ -38,7 +39,7 @@ export const JobPageComponent = () => {
 
     return <Container>
         <Display width="100%" padding="10px" align="center" justify="space-between">
-            <Link style={{'color':'white',fontSize:'20px'}} to={'/'}><ArrowLeftOutlined /></Link>
+            <Link style={{'color':'white',fontSize:'20px'}} to={wrappedRoutes.home}><ArrowLeftOutlined /></Link>
             <Dropdown menu={{items: menu}} trigger={['click']}><Button style={{'fontSize':'20px','border':'none',padding:'none'}} ghost type={'dashed'}><MoreOutlined /></Button></Dropdown>
         </Display>
         {job?.images && <Carousel>
@@ -70,7 +71,7 @@ export const JobPageComponent = () => {
                 <span>Creator: </span>
             <Space>
                 <Avatar src={job?.creator?.photoURL || defaultAvatar}/>
-                <CreatorName to={'/user/'+job?.creator?.id}>{job?.creator?.displayName || 'user ' + job?.creator?.id}</CreatorName>
+                {!!job?.creator?.id && <CreatorName to={wrappedRoutes.user.replace(':id',job?.creator?.id)}>{job?.creator?.displayName || 'user ' + job?.creator?.id}</CreatorName>}
             </Space>
             </Space>
         </InfoContainer>

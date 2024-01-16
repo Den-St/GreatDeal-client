@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Media } from "../../../assets/breakpoints";
 
 export const Container = styled.div`
     overflow:scroll;
@@ -17,6 +18,9 @@ export const Container = styled.div`
     }
     .leaflet-container{
         height:15vh;
+        ${Media.down.m}{
+            height:15svh;
+        }
         margin-bottom:10px;
     }
     .leaflet-bottom {

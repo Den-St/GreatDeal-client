@@ -5,6 +5,7 @@ import { UserI } from "../../../types/user.type"
 import { Avatar } from "../../ChatRoom/styles";
 import { ItemContainer, ItemsContainer, Rate, ReviewCreatorName, ReviewText } from "../styles"
 import { Display } from "../../../assets/Display";
+import { wrappedRoutes } from "../../../consts/routes";
 
 type Props = {
     reviews:{review:string,creator:UserI,rate:number,id:string}[],
@@ -17,7 +18,7 @@ export const ReviewsDirectory:React.FC<Props> = ({reviews,loading}) => {
             <Display key={review.id} background={'#2f3035'} padding={'5px'} direction="column">
                 <Space align="start" >
                     <Avatar src={review.creator.photoURL || defaultAvatar}/>
-                    <ReviewCreatorName to={'/user/'+review.creator.id}>{review.creator.displayName || `user ` + review.creator.id}</ReviewCreatorName>
+                    {!!review.creator.id && <ReviewCreatorName to={wrappedRoutes.user.replace(":id",review.creator.id)}>{review.creator.displayName || `user ` + review.creator.id}</ReviewCreatorName>}
                     <Rate>{review.rate} <StarFilled /></Rate>
                 </Space>
                 <ReviewText>{review.review}</ReviewText>

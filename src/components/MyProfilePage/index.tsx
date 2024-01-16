@@ -16,7 +16,7 @@ import { googleAuthProvider } from "../../firebase/firebaseInit";
 import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { Display } from "../../assets/Display";
-import { routes } from "../../consts/routes";
+import { routes, wrappedRoutes } from "../../consts/routes";
 
 export const MyProfilePage = () => {
     const {user,applicantJobRequests,jobs,loading,
@@ -64,7 +64,7 @@ export const MyProfilePage = () => {
         },
     ];
 
-    if(logout) return <Navigate to={'/registration'}/>
+    if(logout) return <Navigate to={wrappedRoutes.registration}/>
     return <Container>
         <UserContainer>
             {!loading.userLoading ?
@@ -83,7 +83,7 @@ export const MyProfilePage = () => {
                     cancelText="No">
                     <Button danger style={{'background':'#202024'}} ><LogoutOutlined /></Button>
                 </Popconfirm>
-                <Link to={routes.deposit}>MONEY</Link>
+                <Link style={{fontSize:'30px',textDecoration:'none',color:'#24e124'}} to={wrappedRoutes.deposit}>$</Link>
               </>
             : <>
               <PhotosInputContainer $disabled={false}>

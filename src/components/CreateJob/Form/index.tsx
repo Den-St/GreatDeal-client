@@ -10,6 +10,7 @@ import { MapContainer } from "react-leaflet";
 import { Icon, LatLng } from "leaflet";
 import Title from "antd/es/typography/Title";
 import { useAppSelector } from "../../../hooks/redux";
+import { wrappedRoutes } from "../../../consts/routes";
 const {Option} = Select;
 
 type Props = {
@@ -44,7 +45,7 @@ export const CreateJobForm:React.FC<Props> = ({pickedLocation,success,onSubmit,s
         iconSize:[30,30]
     });
 
-    if(success) return <Navigate to={'/'}/>
+    if(success) return <Navigate to={wrappedRoutes.home}/>
     return <Container >
         <MapContainer center={new LatLng(pickedLocation?.lat || 0, pickedLocation?.lng || 0)} zoom={15} scrollWheelZoom={false}>
             <TileLayer

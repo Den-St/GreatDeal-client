@@ -7,6 +7,7 @@ import { Avatar } from "../ChatRoom/styles";
 import { ChatRoomContainer, Container, Right, LastMessageName, LastMessageText, UserName, LastMessageContainer } from "./styles";
 import { useAppSelector } from "../../hooks/redux";
 import { useEffect } from "react";
+import { wrappedRoutes } from "../../consts/routes";
 
 export const MyChatRooms = () => {
     const {chatRooms,chatRoomsLoading,userId} = useChatRooms();
@@ -17,7 +18,7 @@ export const MyChatRooms = () => {
     console.log(chatRooms)
     return <Container>
         {!chatRoomsLoading ? chatRooms.sort((a) => a.job.status === 'done' ? 1 : -1).map(chatRoom => 
-        <ChatRoomContainer key={chatRoom.id} to={'/chat/'+chatRoom.id}>
+        <ChatRoomContainer key={chatRoom.id} to={wrappedRoutes.chat.replace(":id",chatRoom.id)}>
             {chatRoom?.jobCreator.id === userId 
             ? <Avatar src={chatRoom?.worker.photoURL || defaultAvatar}/>
             : <Avatar src={chatRoom?.jobCreator.photoURL || defaultAvatar}/>}

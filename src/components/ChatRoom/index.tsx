@@ -6,7 +6,7 @@ import { Avatar, Container, CreateButton, CreateMessageContainer, HeaderContaine
 import { YourMessage } from "./YourMessage";
 import {ArrowLeftOutlined,CloseCircleOutlined,CheckOutlined,UploadOutlined,MoreOutlined} from "@ant-design/icons";
 import { useDoneJob } from "../../hooks/doneJob.hook";
-import { navRoutes } from "../../consts/routes";
+import { navRoutes, wrappedRoutes } from "../../consts/routes";
 import { Navigate } from "react-router-dom";
 import TextArea from "antd/es/input/TextArea";
 import { useForm, UseFormHandleSubmit, UseFormRegister, UseFormSetValue } from "react-hook-form";
@@ -41,11 +41,16 @@ export const ChatRoom = () => {
           key: '0',
         },
     ];
-
+    const messagesContainerRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        console.log(messagesContainerRef.current?.scrollHeight);
+        const height = messagesContainerRef.current?.scrollHeight;
+        messagesContainerRef.current?.scrollTo({top:height});
+    },[messagesContainerRef.current,messages?.length]);
     const removeImage = (image:File) => {
         setValue('images',watch('images')?.filter(file => file.name !== image.name && file.lastModified !== image.lastModified) || []);
     }
-    if(isWorkFinished) return <Navigate to={'/'}/>
+    if(isWorkFinished) return <Navigate to={wrappedRoutes.home}/>
 
     if(isOnReport && chatRoom?.jobCreator.id && chatRoom?.worker.id) return <ReportForm leave={() => setIsOnReport(false)} suspect={chatRoom?.jobCreator.id === userId ? chatRoom?.worker.id : chatRoom?.jobCreator.id} chat={chatRoom?.id}/>
 
@@ -74,17 +79,17 @@ export const ChatRoom = () => {
             </LeavePage>
             {!chatRoomLoading ? chatRoom?.jobCreator.id === userId 
             ? <Display width="100%" align="center" gap="10px">
-              <UserInfo to={'/user/'+chatRoom?.worker.id}>
+             {!!chatRoom?.worker.id && <UserInfo to={wrappedRoutes.user.replace(":id",chatRoom?.worker.id)}>
                 <Avatar src={chatRoom?.worker.photoURL || defaultAvatar}/>
                 <UserName>{chatRoom?.worker.displayName || 'user ' + chatRoom?.worker.id}</UserName>
-              </UserInfo>
+              </UserInfo>}
               <Dropdown menu={{items: menu}} trigger={['click']}><Button style={{'fontSize':'20px','border':'none',padding:'none'}} ghost type={'dashed'}><MoreOutlined /></Button></Dropdown>
               </Display>
             : <Display width="100%" align="center" gap="10px">
-              <UserInfo to={'/user/'+chatRoom?.jobCreator.id}>
+              {!!chatRoom?.jobCreator.id && <UserInfo to={wrappedRoutes.user.replace(":id",chatRoom?.jobCreator.id)}>
                 <Avatar src={chatRoom?.jobCreator.photoURL || defaultAvatar}/>
                 <UserName>{chatRoom?.jobCreator.displayName || 'user ' + chatRoom?.jobCreator.id}</UserName>
-              </UserInfo> 
+              </UserInfo>} 
               <Dropdown menu={{items: menu}} trigger={['click']}><Button style={{'fontSize':'20px','border':'none',padding:'none'}} ghost type={'dashed'}><MoreOutlined /></Button></Dropdown>
               </Display>
               : <Space>
@@ -105,7 +110,7 @@ export const ChatRoom = () => {
             </>
             : <Skeleton.Button size="large"/>}
         </JobInfoContainer> 
-        <MessagesContainer>
+        <MessagesContainer ref={messagesContainerRef}>
             {!messagesLoading ? messages?.map(message => 
                 message.sender.id === userId 
                     ? <YourMessage key={message.id} message={message}/> 

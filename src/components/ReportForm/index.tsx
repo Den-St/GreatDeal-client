@@ -5,12 +5,16 @@ import styled from "styled-components";
 import TextArea from "antd/es/input/TextArea";
 import { useReport } from "../../hooks/report.hook";
 import { useEffect } from "react";
+import { Media } from "../../assets/breakpoints";
 const { Title,Paragraph,Text } = Typography;
 
 const Container = styled.div`
     display:flex;
     color:white;
     height:100vh;
+    ${Media.down.m}{
+        height:100svh;
+    }
     background:rgb(19,21,27);
     flex-direction:column;
     padding:10px 20px;

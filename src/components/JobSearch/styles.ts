@@ -7,6 +7,9 @@ export const Container = styled.div`
     box-sizing:border-box;
     background:rgb(32,32,36);
     height: 90vh;
+    ${Media.down.m}{
+        height:90svh;
+    }
     color:white;
     display:flex;
     flex-direction:column;

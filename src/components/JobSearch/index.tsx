@@ -1,6 +1,7 @@
 import { Button, Checkbox, Collapse, Input, Modal, Select, Skeleton, Spin, Tag } from 'antd'
 import { useEffect, useState } from 'react';
 import { Display } from '../../assets/Display';
+import { wrappedRoutes } from '../../consts/routes';
 import { useSearchCategories } from '../../hooks/searchCategories.hook';
 import { useSearchJobs } from '../../hooks/searchJobs.hook';
 import { JobT } from '../../types/job.type';
@@ -66,7 +67,7 @@ export const JobSearch = () => {
         {!jobsLoading ? !!jobs?.length ? jobs?.map(job => 
         <JobItemContainer key={job?.id}>
             <CategoryIcon src={job.category?.iconUrl}/>
-            <JobTitle to={`/job/${job?.id}`}>{job?.title}</JobTitle>
+            <JobTitle to={wrappedRoutes.job.replace(":id",job.id)}>{job?.title}</JobTitle>
             <JobReward>{job.reward}</JobReward>
         </JobItemContainer>) : <Tag style={{'fontSize':"30px","padding":"15px",textAlign:'center',color:'white'}}>No jobs</Tag> : <Display width='100%' height='100%' justify='center' align='center'><Spin/></Display>}
     </JobsContainer>

@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Media } from "../../assets/breakpoints";
 
 export const Container = styled.div`
     width: 100%;
     height:100vh;
+    ${Media.down.m}{
+        height:100svh;
+    }
     gap:5px;
     display:flex;
     color:white;
@@ -11,6 +15,9 @@ export const Container = styled.div`
     box-sizing:border-box;
     .leaflet-container{
         height:20vh;
+        ${Media.down.m}{
+            height:20svh;
+        }
     }
     .leaflet-bottom {
         display:none;
@@ -24,6 +31,9 @@ export const Container = styled.div`
     }
     .leaflet-container{
         height:15vh;
+        ${Media.down.m}{
+            height:15svh;
+        }
     }
     .leaflet-bottom {
         display:none;

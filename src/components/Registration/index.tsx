@@ -8,6 +8,7 @@ import { useRegistration } from "../../hooks/registration.hook";
 import {GoogleOutlined} from '@ant-design/icons';
 import { googleAuthProvider } from "../../firebase/firebaseInit";
 import { useEffect } from "react";
+import { wrappedRoutes } from "../../consts/routes";
 
 export const RegistrationComponent = () => {
     const {signInWithGoogle,onSubmit,success,contextHolder,showError} = useRegistration();
@@ -25,7 +26,7 @@ export const RegistrationComponent = () => {
         if(errors.password?.message) showError(errors.password.message);
     },[errors.email, errors.password]);
     
-  if(success) return <Navigate to={'/'}/>
+  if(success) return <Navigate to={wrappedRoutes.home}/>
 
   return <Container>
     {contextHolder}
@@ -42,7 +43,7 @@ export const RegistrationComponent = () => {
     <Bottom>
         <RegistrationContainer>
             <NoAccountNotification>Already have an account?</NoAccountNotification>
-            <RegistrationButton to={'/login'}>Login</RegistrationButton>
+            <RegistrationButton to={wrappedRoutes.login}>Login</RegistrationButton>
         </RegistrationContainer>
         <SocialsContainer>
             <NoAccountNotification>You can sign up using this socials:</NoAccountNotification>

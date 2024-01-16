@@ -1,8 +1,12 @@
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
+import { Media } from "../../assets/breakpoints";
 
 export const Container = styled.div`
     height:90vh;
+    ${Media.down.m}{
+        height:90svh;
+    }
     .ant-tabs-tab{
         margin-left:20px;
     }

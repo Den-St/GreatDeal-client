@@ -17,6 +17,9 @@ export const Container = styled.div`
 
 export const Header = styled.div`
     height:7vh;
+    ${Media.down.m}{
+        height:7svh;
+    }
     background-color:rgb(19,21,27);
     display:flex;
     align-items:center;

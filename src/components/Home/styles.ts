@@ -5,6 +5,9 @@ export const Container = styled.div`
     width:100%;
     .leaflet-container{
         height:90vh;
+        ${Media.down.m}{
+            height:90svh;
+        }
     }
     ${Media.down.m}{
         height: 84%;

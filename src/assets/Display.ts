@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Media } from "./breakpoints";
 
 export const Display = styled.div<{width?:string,height?:string,direction?:"column",position?:'relative' | 'absolute' | 'fixed',background?:string,fontSize?:string,maxHeight?:string,
                                    gap?:string,align?:'center' | 'start' | 'end',padding?:string,top?:string,bottom?:string,borderRadius?:string,margin?:string,maxWidth?:string,minWidth?:string,
@@ -26,5 +27,7 @@ export const Display = styled.div<{width?:string,height?:string,direction?:"colu
     ${({maxHeight})=> maxHeight && `max-height:${maxHeight};`}
     ${({maxWidth})=> maxWidth && `max-width:${maxWidth};`}
     ${({minWidth})=> minWidth && `min-width:${minWidth};`}
-    
+    ${Media.down.m}{
+        ${({height}) => height && `height:${height.replace('vh','svh')};`}
+    }
 `;

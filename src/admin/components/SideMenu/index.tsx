@@ -2,6 +2,7 @@ import { Menu, MenuProps } from "antd"
 import { Display } from "../../../assets/Display"
 import {NotificationOutlined, UserOutlined} from "@ant-design/icons";
 import { Link } from "react-router-dom";
+import { wrappedAdminRoutes } from "../../routes";
 
 export const SideMenu = () => {
     type MenuItem = Required<MenuProps>['items'][number];
@@ -24,10 +25,10 @@ export const SideMenu = () => {
       
       const items: MenuProps['items'] = [
         getItem('Reports', 'sub1', <NotificationOutlined />,[
-            getItem(<Link to={'/admin/userReports'}>User reports</Link>,'1',<UserOutlined />),
-            getItem(<Link to={'/admin/jobReports'}>Job reports</Link>,'2')
+            getItem(<Link to={wrappedAdminRoutes.userReports}>User reports</Link>,'1',<UserOutlined />),
+            // getItem(<Link to={'/admin/jobReports'}>Job reports</Link>,'2')
         ]),
-        getItem(<Link to={'/admin/users'}>User reports</Link>, '3', <UserOutlined />),
+        // getItem(<Link to={'/admin/users'}>User reports</Link>, '3', <UserOutlined />),
       ];
       
     return <Menu

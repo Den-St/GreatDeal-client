@@ -6,6 +6,7 @@ import { Col, Divider, Empty, Row, Skeleton, Space, Spin, Statistic, Tag } from 
 import { Avatar } from "../ChatRoom/styles";
 import { Rate, ReviewCreatorName, ReviewText } from "../MyProfilePage/styles";
 import { useEffect } from "react";
+import { wrappedRoutes } from "../../consts/routes";
 
 export const UserProfile = () => {
     const {user,loading,stats,reviews} = useUserProfile();
@@ -38,7 +39,7 @@ export const UserProfile = () => {
                 <Space style={{'background':'#2f3035','padding':'5px'}} direction="vertical">
                     <Space align="start" >
                         <Avatar src={review.creator.photoURL || defaultAvatar}/>
-                        <ReviewCreatorName to={'/user/'+review.creator.id}>{review.creator.displayName || `user` + review.creator.id}</ReviewCreatorName>
+                        {!!review.creator.id && <ReviewCreatorName to={wrappedRoutes.user.replace(':id',review.creator.id)}>{review.creator.displayName || `user` + review.creator.id}</ReviewCreatorName>}
                         <Rate>{review.rate} <StarFilled /></Rate>
                     </Space>
                     <ReviewText>{review.review}</ReviewText>

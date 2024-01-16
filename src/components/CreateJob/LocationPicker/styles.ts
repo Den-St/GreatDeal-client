@@ -1,10 +1,17 @@
 import styled from "styled-components";
+import { Media } from "../../../assets/breakpoints";
 
 export const Container = styled.div`
     width:100%;
     height:93vh;
+    ${Media.down.m}{
+        height:93svh;
+    }
     .leaflet-container{
         height:93vh;
+        ${Media.down.m}{
+            height:93svh;
+        }
     }
     .leaflet-bottom{
         display:none;

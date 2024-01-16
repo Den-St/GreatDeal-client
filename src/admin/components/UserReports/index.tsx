@@ -8,6 +8,9 @@ import { useSearchUserReports } from "../../hooks/userReports";
 import { defaultAvatar } from "../../../consts/defaultAvatar";
 import { Link } from "react-router-dom";
 import { UserName } from "./styles";
+import { Media } from "../../../assets/breakpoints";
+import { wrappedAdminRoutes } from "../../routes";
+import { wrappedRoutes } from "../../../consts/routes";
 const {Option} = Select;
 const {Panel} = Collapse;
 const {Text} = Typography;
@@ -43,6 +46,9 @@ const Container = styled.div`
     }
     .ant-radio-wrapper .ant-radio-inner{
         background-color:transparent;
+    }
+    ${Media.down.m}{
+        height:100svh;
     }
 `;
 
@@ -89,19 +95,19 @@ export const UserReports = () => {
         <Display direction="column" gap={'10px'} width={'80%'}>
             {!reportsLoading 
                 ? reports.map(report => 
-                    <Link to={'/admin/userReport/'+report.id} style={{color:'white',textDecoration:'none'}}>
+                    <Link to={wrappedAdminRoutes.userReport.replace(":id",report.id)} style={{color:'white',textDecoration:'none'}}>
                     <Display padding="10px 5px" background="#1b1f28ae" direction="column" gap="7px" key={report.id} >
                         <Display justify="space-between" gap={'10px'}>
                             <Display direction="column" gap={'5px'}>
                                 <Display align="center" gap='5px'>
                                     Creator: 
                                     <Avatar src={report.creator.photoURL || defaultAvatar}/>
-                                    <UserName to={'/user/' + report.creator.id}>{'user ' + report.creator.id}</UserName>
+                                    {!!report.creator.id && <UserName to={wrappedRoutes.user.replace(":id",report.creator.id)}>{'user ' + report.creator.id}</UserName>}
                                 </Display>
                                 <Display align="center" gap='5px'>
                                     Suspect: 
                                     <Avatar src={report.suspect.photoURL || defaultAvatar}/>
-                                    <UserName to={'/user/' + report.suspect.id}>{'user ' + report.suspect.id}</UserName>
+                                    {!!report.suspect.id && <UserName to={wrappedRoutes.user.replace(":id",report.suspect.id)}>{'user ' + report.suspect.id}</UserName>}
                                 </Display>
                             </Display>
                             <Display padding="5px" gap={'5px'} align={'center'} height={'30px'}>

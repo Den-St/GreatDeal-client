@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Media } from "./breakpoints";
 
 export const UserLocationLoader = styled.div`
     background-color:#1f1f1f;
@@ -9,6 +10,9 @@ export const UserLocationLoader = styled.div`
     position:absolute;
     width: 100%;
     height:100vh;
+    ${Media.down.m}{
+        height:100svh;
+    }
     top:0;
     bottom:100%;
     left:0;

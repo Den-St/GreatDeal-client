@@ -1,9 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { Media } from "../../assets/breakpoints";
 
 export const Container = styled.nav`
     width:100%;
     height:10vh;
+    ${Media.down.m}{
+        height:10svh;
+    }
     background-color:white;
     display:flex;
     align-items:center;

@@ -8,6 +8,7 @@ import { useReportResults } from "../../hooks/reportResults";
 import { useUserReport } from "../../hooks/userReport";
 import { UserName } from "../UserReports/styles"
 import { reportStatuses } from "../../reportStatuses";
+import { wrappedRoutes } from "../../../consts/routes";
 const {Text} = Typography;
 
 const Container = styled.div`
@@ -38,12 +39,12 @@ export const UserReport = () => {
                     <Display align="center" gap='5px'>
                         Creator: 
                         <Avatar src={report?.creator?.photoURL || defaultAvatar}/>
-                        <UserName to={'/user/' + report?.creator.id}>{'user ' + report?.creator.id}</UserName>
+                        {!!report?.creator.id && <UserName to={wrappedRoutes.user.replace(':id',report?.creator.id)}>{'user ' + report?.creator.id}</UserName>}
                     </Display>
                     <Display align="center" gap='5px'>
                         Suspect: 
                         <Avatar src={report?.suspect?.photoURL || defaultAvatar}/>
-                        <UserName to={'/user/' + report?.suspect.id}>{'user ' + report?.suspect.id}</UserName>
+                        {!!report?.suspect.id && <UserName to={wrappedRoutes.user.replace(':id',report?.suspect.id)}>{'user ' + report?.suspect.id}</UserName>}
                     </Display>
                 </Display>
                 <Display padding="5px" gap={'5px'}>
@@ -73,7 +74,7 @@ export const UserReport = () => {
                 </Display>
             )}
         </Display>
-        {report?.status !== reportStatuses.done && <Display width="240px" background="#1b1f28ae" direction="column" padding="5px" position="fixed" right="140px" top={'15px'} gap={'5px'}>
+        {report?.status !== reportStatuses.done && <Display width="240px" height="600px" background="#1b1f28ae" direction="column" padding="5px" position="fixed" right="140px" top={'15px'} gap={'5px'} style={{overflowY:'scroll'}}>
             {report?.status !== 'under investigation' 
                 && <Button type="primary" onClick={() => onChangeReportStatus('under investigation')}>Start investigation</Button> }
             {report?.status !== reportStatuses.notUnder && 
@@ -107,7 +108,7 @@ export const UserReport = () => {
                             Suspect: 
                             <Display style={{'flexWrap':'wrap',width:'100%'}}>
                                 <Avatar src={reportResult?.suspect?.photoURL || defaultAvatar}/>
-                                <UserName to={'/user/' + reportResult?.suspect.id}>{'user' + report?.suspect.id}</UserName>
+                                {!!reportResult?.suspect.id && <UserName to={wrappedRoutes.user.replace(':id',reportResult?.suspect.id)}>{'user' + report?.suspect.id}</UserName>}
                             </Display>
                         </Display>
                         <Text>Comment: {reportResult.comment}</Text>

@@ -7,6 +7,7 @@ import { useCreateJob } from "../../hooks/createJob.hook";
 import { useSearchCategories } from "../../hooks/searchCategories.hook";
 import { Spin } from "antd";
 import { useEffect } from "react";
+import { wrappedRoutes } from "../../consts/routes";
 
 export const CreateJob = () => {
     const {pickedLocation,setLocation,step,userLocationLoading,success,
@@ -34,7 +35,7 @@ export const CreateJob = () => {
     return <Container>
         <Header>
             {step !== 1 ? <BackButton disabled={step === 1} onClick={prevStep}><ArrowLeftOutlined /></BackButton>
-                        : <LeavePage to={'/'}><ArrowLeftOutlined /></LeavePage>}
+                        : <LeavePage to={wrappedRoutes.home}><ArrowLeftOutlined /></LeavePage>}
             <StepTitle>{steps[step - 1].title}</StepTitle>
         </Header>
         {userLocationLoading && !pickedLocation && <UserLocationLoader><Spin /></UserLocationLoader>}
