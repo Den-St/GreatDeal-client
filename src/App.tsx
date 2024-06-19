@@ -16,14 +16,10 @@ import { AdminPanelLayout } from "./admin/components/Layout"
 import { BanProvider } from "./providers/banProvider"
 import { AfterPaymentProvider } from "./providers/afterPaymentProvider"
 export const App = () => {
-  // onAuthStateChanged(googleAuthProvider,() => console.log('authed user',googleAuthProvider.currentUser))
   const user = useAppSelector(state => state.user);
   console.log(user)
   useEffect(() => {
     document.title = 'GreatDeal'
-    // getUsers().then((data) => console.log(data));
-    // getJobs().then(a => console.log(a));
-    // getCategoriesByName('leaf').then(s => console.log("999",s));
   },[]);
   const path = useLocation().pathname;
   

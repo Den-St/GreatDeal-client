@@ -26,7 +26,7 @@ export const AfterPayment = () => {
     },[]);
 
     return <Display style={{width:'100%','height':'90vh','alignItems':'center','justifyContent':'center',background:'rgb(31,32,36)',flexDirection:'column'}}>
-        {loading ? <Spin/> : statusCode !== undefined && statuses[statusCode]};
+        {loading ? <Spin/> : statusCode !== undefined && statuses[statusCode]}
         <Link to={wrappedRoutes.home} style={{textDecoration:'none',color:'white'}}>Go to main page</Link>
     </Display>
 }

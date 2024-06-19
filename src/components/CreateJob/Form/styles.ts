@@ -56,7 +56,7 @@ export const Container = styled.div`
         opacity:0.9;
         position:relative;
     }
-    :where(.css-dev-only-do-not-override-1m62vyb).ant-carousel .slick-initialized .slick-slide {
+    .ant-carousel .slick-initialized .slick-slide {
         display: flex;
     }
     .leaflet-bottom{

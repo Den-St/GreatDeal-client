@@ -16,8 +16,6 @@ export const HomeComponent = () => {
   const [userLocationLoading,setUserLocationLoading] = useState(true);
   const {jobs,jobsLoading,setMapBounds,setZoom,zoom} = usePrintNearJobs();
   
-
-
   return <Container>
       <MapContainer center={[51.505, -0.09]} zoom={zoom} scrollWheelZoom={false}>
         <TileLayer

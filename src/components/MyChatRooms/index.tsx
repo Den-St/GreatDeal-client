@@ -8,14 +8,15 @@ import { ChatRoomContainer, Container, Right, LastMessageName, LastMessageText, 
 import { useAppSelector } from "../../hooks/redux";
 import { useEffect } from "react";
 import { wrappedRoutes } from "../../consts/routes";
+import { ChatRoomT } from "../../types/chatRoom.type";
 
 export const MyChatRooms = () => {
     const {chatRooms,chatRoomsLoading,userId} = useChatRooms();
     useEffect(() => {
         document.title = 'My Chats - Great Deal';
     },[]);
-    
-    console.log(chatRooms)
+    const getLastMessageUserName = (chatRoom:ChatRoomT) => chatRoom.lastMessage.sender.id === userId ? 'me' : !!chatRoom.lastMessage.sender.displayName ? chatRoom.lastMessage.sender.displayName + ':' : `user ` + chatRoom.lastMessage.sender.id + ':';
+
     return <Container>
         {!chatRoomsLoading ? chatRooms.sort((a) => a.job.status === 'done' ? 1 : -1).map(chatRoom => 
         <ChatRoomContainer key={chatRoom.id} to={wrappedRoutes.chat.replace(":id",chatRoom.id)}>
@@ -28,8 +29,8 @@ export const MyChatRooms = () => {
                 : <UserName>{chatRoom.jobCreator.displayName || 'user ' + chatRoom.jobCreator.id}</UserName>}
                 {chatRoom.lastMessage ? 
                 <LastMessageContainer>
-                    <LastMessageName>{chatRoom.lastMessage.sender.displayName + ':' || `user` + chatRoom.lastMessage.sender.id + ':'}</LastMessageName>
-                    <LastMessageText>{chatRoom.lastMessage.text}</LastMessageText>
+                    <LastMessageName>{getLastMessageUserName(chatRoom)}</LastMessageName>
+                    <LastMessageText>{chatRoom.lastMessage.text || !!chatRoom.lastMessage.images?.length && 'Photo'}</LastMessageText>
                 </LastMessageContainer>
                 : 'No messages'}
             </Right>

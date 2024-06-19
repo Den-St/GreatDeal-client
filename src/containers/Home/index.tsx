@@ -5,5 +5,6 @@ export const Home = () => {
     useEffect(() => {
         document.title = "Great Deal";
     },[])
+    
     return <HomeComponent/>
 }

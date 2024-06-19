@@ -42,10 +42,10 @@ export const useChatRoom = (clearInputs:() => void) => {
     }
 
     const onCreateMessage = async (data:CreateMessageFormT) => {
-        if(!userId || !chatRoomId || !data.text) return;
+        if(!userId || !chatRoomId || (!data.text && !data.images?.length)) return;
         const images = data?.images ? await uploadImages(data.images) : null;
         const newMessage = await createMessage({
-            text:data.text,
+            text:data.text || '',
             sender:userId,
             chatRoom:chatRoomId,
             createdAt:new Date(),

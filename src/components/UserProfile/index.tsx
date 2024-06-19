@@ -29,9 +29,9 @@ export const UserProfile = () => {
             <Col >
                 <Statistic title="Jobs" value={stats?.numberOfJobs} loading={loading.stats}/>
             </Col>
-            <Col >
+            {/* <Col >
                 <Statistic title="Fdsfsd" value={45} loading={loading.stats}/>
-            </Col>
+            </Col> */}
         </Row>
         <Divider/>
         <Reviews>

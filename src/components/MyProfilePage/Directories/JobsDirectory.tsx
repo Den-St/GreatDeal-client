@@ -21,7 +21,7 @@ export const JobsDirectory:React.FC<Props> = ({jobs,jobsLoading,refetch}) => {
     <Space style={{'background':'#2f3035'}} key={job.id} size={'small'} direction='vertical'>
         <ItemContainer >
             <CategoryIcon src={job.category?.iconUrl}/>
-            <JobTitle to={wrappedRoutes.job.replace(":id",job.id)}>{job.title}fasdfbbbbbb</JobTitle>
+            <JobTitle to={wrappedRoutes.job.replace(":id",job.id)}>{job.title}</JobTitle>
             <JobReward>{job.reward}</JobReward>
         </ItemContainer>
         <Space>

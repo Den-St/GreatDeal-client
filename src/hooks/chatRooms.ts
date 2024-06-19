@@ -36,7 +36,7 @@ export const useChatRooms = () => {
 
                 chatRoom.job = jobs[i];
             });
-
+            console.log(_chatRooms)
             setChatRooms(_chatRooms);
             setChatRoomsLoading(false);
         });

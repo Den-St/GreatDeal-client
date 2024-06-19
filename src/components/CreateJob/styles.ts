@@ -11,7 +11,7 @@ export const Container = styled.div`
     box-sizing:border-box;
     background:rgb(31,32,36);
     .ant-carousel .slick-list .slick-slide.slick-active{
-        display:flex;
+        display:flex !important;
     }
 `;
 
